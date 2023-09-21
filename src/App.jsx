@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router'
+import { Route, Routes } from 'react-router
 import './App.css'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
@@ -7,7 +7,6 @@ import Dashboard from './pages/Dashboard'
 import Assingments from './pages/Assingments'
 
 function App() {
-
   return (
     <>
     <Routes>
@@ -18,7 +17,6 @@ function App() {
       <Route path='/assignments' element={<Assingments />} />
     </Routes>
     </>
-      
   )
 }
 
