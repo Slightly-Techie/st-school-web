@@ -1,12 +1,22 @@
+import { Route, Routes } from 'react-router
 import './App.css'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Lessons from './pages/Lessons'
+import Dashboard from './pages/Dashboard'
+import Assingments from './pages/Assingments'
 
 function App() {
-
-
   return (
-      <div>
-          <h2 className="text-3xl font-bold underline">slightly techie</h2>
-      </div>
+    <>
+    <Routes>
+      <Route path='/login' element={<Login />} />
+      <Route path='/signup' element={<Signup />} />
+      <Route path='/lessons' element={<Lessons />} />
+      <Route path='/dashboard' element={<Dashboard />} />
+      <Route path='/assignments' element={<Assingments />} />
+    </Routes>
+    </>
   )
 }
 
