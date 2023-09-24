@@ -1,8 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Lessons = () => {
   return (
-    <div>Lessons</div>
+    <div className="lessons">
+      Lessons
+    </div>
   )
 }
 

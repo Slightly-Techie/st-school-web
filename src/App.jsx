@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
@@ -13,11 +13,13 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/lessons' element={<Lessons />} />
-      <Route path='/dashboard' element={<Dashboard />} />
+      <Route path='/dashboard' element={<Dashboard />}>
+        <Route path='Lessons' element={<Lessons/>}/>
+      </Route>
       <Route path='/assignments' element={<Assingments />} />
     </Routes>
     </>
   )
 }
 
-export default App
+export default App;
