@@ -63,7 +63,7 @@ const Sidebar = ({Menus}) => {
                 </span>
           </div>
           <div className="flex rounded-md p-2 cursor-pointer text-gray-300 hover:bg-light-white items-center gap-x-4 float">
-              <img src='/src/assets/chart.png' />
+              <img src='/src/assets/user.png' />
                 <span  className={`${!open && "hidden"} origin-left duration-200`}>
                   Logout
                 </span>
