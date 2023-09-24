@@ -1,9 +1,10 @@
-import React from 'react'
-import background from "../assets/backgroundImage.jpg"
+import background from '../assets/backgroundImage.jpg'
 
 const Background = () => {
   return (
-   <img src={background} alt='background-img' />
+    <div className="hidden md:flex h-screen  float-right overflow-hidden">
+      <img src={background} alt="background-img" className="w-[90dvw]" />
+    </div>
   )
 }
 
