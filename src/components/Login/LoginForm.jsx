@@ -8,6 +8,7 @@ function LoginForm() {
   const [type, setType] = useState('password')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isChecked, setIsChecked] = useState(false)
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -15,8 +16,15 @@ function LoginForm() {
     if (email.valueOf() === '' || password.valueOf() === '') {
       toast.error('Please fill all the fields')
     } else {
-      console.log({ email, password })
+      console.log({ email, password, isChecked })
       toast.success('Login Successful')
+    }
+
+    if (isChecked) {
+      setIsChecked(true)
+      toast.success('Always logged in')
+    } else {
+      setIsChecked(false)
     }
 
     setEmail('')
@@ -78,7 +86,12 @@ function LoginForm() {
           className="w-[25rem] md:w-[30rem] bg-black p-2 cursor-pointer text-white text-center rounded-lg"
         />
         <div className="flex items-center gap-3 my-3">
-          <input type="checkbox" className="w-5 h-5" />
+          <input
+            type="checkbox"
+            className="w-5 h-5"
+            value="keep-me-logged-in"
+            onChange={(e) => setIsChecked(e.target.checked)}
+          />
           <p>Keep me logged in</p>
         </div>
         <p>
