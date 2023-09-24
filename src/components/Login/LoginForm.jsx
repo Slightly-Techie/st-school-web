@@ -31,36 +31,35 @@ function LoginForm() {
     setPassword('')
   }
   return (
-    <div className="flex flex-col  justify-center items-start p-5 md:pl-[12rem] md:w-[70dvw] h-screen relative">
+    <div className="flex flex-col justify-center items-start p-3 md:pl-[8rem] mx-auto max-w-[100dvw] md:w-[70dvw] h-screen relative ">
       <img
         src={logo}
-        alt=""
-        className="mb-4 md:my-0 md:absolute top-5 left-10"
+        alt="SlightlyTechie's logo"
+        className="mb-4 md:my-0 absolute top-[5.5rem] left-2 md:top-5 md:left-10"
       />
       <LoginHeading />
-      <form className="flex flex-col gap-5" onSubmit={handleLogin}>
-        <div className="flex flex-col  gap-2">
-          <label htmlFor="email" className="text-[#706E6E]">
-            Email
-          </label>
+      <form
+        className=" flex flex-col w-full p-2 gap-5 text-[#444444]"
+        onSubmit={handleLogin}
+      >
+        <div className="flex flex-col w-full  gap-2">
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
             placeholder="example@gmail.com"
-            className="outline-none w-[25rem] p-2 rounded-lg outline outline-1 outline-[#706E6E]"
+            className="outline-none p-2 rounded-lg outline outline-1 outline-[#444444]"
             value={email.trim()}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="flex flex-col gap-2 relative">
-          <label htmlFor="password" className="text-[#706E6E]">
-            Password
-          </label>
+          <label htmlFor="password">Password</label>
           <input
             type={type}
             name="password"
-            placeholder="passsword******"
-            className="outline-none w-[25rem] p-2 rounded-lg outline outline-1 outline-[#706E6E]"
+            placeholder="pass********"
+            className="outline-none  p-2 rounded-lg outline outline-1 outline-[#444444]"
             value={password.trim()}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -69,23 +68,23 @@ function LoginForm() {
               className="absolute right-6 top-[2.5rem] cursor-pointer"
               onClick={() => setType('text')}
             >
-              <BsEyeSlashFill size={25} className="text-[#444444]" />
+              <BsEyeSlashFill size={24} />
             </div>
           ) : (
             <div
               className="absolute right-6 items-center  top-[2.5rem] cursor-pointer"
               onClick={() => setType('password')}
             >
-              <BsEyeFill size={25} className="text-[#444444]" />
+              <BsEyeFill size={24} />
             </div>
           )}
         </div>
         <input
           type="submit"
           value="Login"
-          className="w-[25rem] bg-black p-2 cursor-pointer text-white text-center rounded-lg"
+          className=" bg-black p-2 cursor-pointer text-white text-center rounded-lg"
         />
-        <div className="flex items-center gap-3 my-3">
+        <div className="flex items-center gap-3 my-2">
           <input
             type="checkbox"
             className="w-5 h-5"
