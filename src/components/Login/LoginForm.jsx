@@ -48,7 +48,7 @@ function LoginForm() {
             type="email"
             name="email"
             placeholder="example@gmail.com"
-            className="outline-none p-2 rounded-lg outline outline-1 outline-[#444444]"
+            className="outline-none p-2 h-10 rounded-lg outline outline-1 outline-[#444444]"
             value={email.trim()}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -59,7 +59,7 @@ function LoginForm() {
             type={type}
             name="password"
             placeholder="pass********"
-            className="outline-none  p-2 rounded-lg outline outline-1 outline-[#444444]"
+            className="outline-none h-10 p-2 rounded-lg outline outline-1 outline-[#444444]"
             value={password.trim()}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -82,7 +82,7 @@ function LoginForm() {
         <input
           type="submit"
           value="Login"
-          className=" bg-black p-2 cursor-pointer text-white text-center rounded-lg"
+          className=" bg-black p-2 h-11 cursor-pointer text-white text-center rounded-lg"
         />
         <div className="flex items-center gap-3 my-2">
           <input
