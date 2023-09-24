@@ -31,7 +31,7 @@ function LoginForm() {
     setPassword('')
   }
   return (
-    <div className="flex flex-col justify-center items-start p-3 md:pl-[12rem] mx-auto max-w-[100dvw] md:w-[70dvw] h-screen relative ">
+    <div className="flex flex-col justify-center items-start p-3 md:pl-[8rem] mx-auto max-w-[100dvw] md:w-[70dvw] h-screen relative ">
       <img
         src={logo}
         alt="SlightlyTechie's logo"
@@ -42,7 +42,7 @@ function LoginForm() {
         className=" flex flex-col w-full p-2 gap-5 text-[#444444]"
         onSubmit={handleLogin}
       >
-        <div className="flex flex-col w-full md:w-[25rem] gap-2">
+        <div className="flex flex-col w-full  gap-2">
           <label htmlFor="email">Email</label>
           <input
             type="email"
