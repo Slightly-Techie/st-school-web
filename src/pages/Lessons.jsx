@@ -1,10 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import LessonCard from '../components/Lessons/LessonCard'
+import LessonHeading from '../components/Lessons/LessonHeading'
 
 const Lessons = () => {
   return (
-    <div className="lessons">
-      Lessons
+    <div className="lessons ">
+      <LessonHeading />
+      <LessonCard />
     </div>
   )
 }
