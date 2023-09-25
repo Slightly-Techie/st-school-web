@@ -17,8 +17,6 @@ const SignupForm = () => {
     3: <PaymentSuccess />
   };
 
-
-
   return (
     <div className="justify-self-center w-full max-w-[508px]">
       <div>{pageComponents[page]}</div>

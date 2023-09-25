@@ -7,7 +7,6 @@ const UserDetailsForm = ({onNext}) => {
     const handleSubmit = (e) =>{
         e.preventDefault();
         onNext();
-    
     }
   return (
     <LayoutWrapper>
@@ -22,7 +21,6 @@ const UserDetailsForm = ({onNext}) => {
           <input
             type="text"
             id="fullName"
-            name="fullName"
             placeholder="John Doe"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
