@@ -6,7 +6,7 @@ const Background = () => {
       <img
         src={background}
         alt="background-img"
-        className="w-[90dvw] object-center object-fill"
+        className="w-[100dvw] object-center object-cover"
       />
     </div>
   )

@@ -31,11 +31,11 @@ function LoginForm() {
     setPassword('')
   }
   return (
-    <div className="flex flex-col justify-center items-start p-3 md:pl-[8rem] mx-auto max-w-[100dvw] md:w-[70dvw] h-screen relative ">
+    <div className="flex flex-col justify-center items-start p-3 md:px-[7rem] mx-auto md:ml-20 max-w-[100dvw] md:w-[80dvw] h-screen relative ">
       <img
         src={logo}
         alt="SlightlyTechie's logo"
-        className="mb-4 md:my-0 absolute top-[5.5rem] left-2 md:top-5 md:left-10"
+        className="mb-4 md:my-0 absolute top-[5.5rem] left-2 md:top-5 md:left-6"
       />
       <LoginHeading />
       <form
@@ -46,19 +46,22 @@ function LoginForm() {
           <label htmlFor="email">Email</label>
           <input
             type="email"
+            id="email"
             name="email"
             placeholder="example@gmail.com"
             className="outline-none p-2 h-10 rounded-lg outline outline-1 outline-[#444444]"
             value={email.trim()}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="off"
           />
         </div>
         <div className="flex flex-col gap-2 relative">
           <label htmlFor="password">Password</label>
           <input
             type={type}
+            id="password"
             name="password"
-            placeholder="pass********"
+            placeholder="•••••••••••••"
             className="outline-none h-10 p-2 rounded-lg outline outline-1 outline-[#444444]"
             value={password.trim()}
             onChange={(e) => setPassword(e.target.value)}
@@ -81,12 +84,16 @@ function LoginForm() {
         </div>
         <input
           type="submit"
+          id="submit"
+          name="submit"
           value="Login"
           className=" bg-black p-2 h-11 cursor-pointer text-white text-center rounded-lg"
         />
         <div className="flex items-center gap-3 my-2">
           <input
             type="checkbox"
+            id="checkbox"
+            name="checkbox"
             className="w-5 h-5"
             value="keep-me-logged-in"
             onChange={(e) => setIsChecked(e.target.checked)}
