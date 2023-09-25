@@ -1,14 +1,19 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import LayoutWrapper from "./LayoutWrapper";
+import { Link } from "react-router-dom";
+import LayoutWrapper from "./components/LayoutWrapper";
 
-const UserStackForm = ({onNext}) => {
-const navigate = useNavigate()
+const UserStackForm = ({onNext, onPrevious}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onNext();
   };
+
+  const handleNavigatePrevious = (e) => {
+    e.preventDefault()
+    onPrevious()
+  }
+  
 
   return (
     <LayoutWrapper>
@@ -51,23 +56,23 @@ const navigate = useNavigate()
             <option name="female">Python</option>
           </select>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex md:flex-row items-center flex-col gap-2">
           <button
             type="submit"
-            onClick={() => navigate(-1)}
-            className="bg-white text-black border border-black px-4 py-2 w-full rounded-lg"
+            onClick={handleNavigatePrevious}
+            className="bg-white text-black border border-gray-500 px-4 py-2 w-full rounded-lg hover:border-gray-900"
           >
             Go Back
           </button>
           <button
             type="submit"
             onClick={handleSubmit}
-            className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg mb-4"
+            className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg md:mb-0 border border-gray-900 mb-4 hover:bg-gray-800"
           >
             Proceed
           </button>
         </div>
-        <div className="pb-3">
+        <div className="pb-3 md:mt-4">
           <p>
             <span>Already have an account?</span>
             <Link to={"/login"} className="font-semibold ml-2">

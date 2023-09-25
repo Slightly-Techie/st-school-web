@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import LayoutWrapper from './LayoutWrapper';
+import LayoutWrapper from './components/LayoutWrapper';
 
 const UserDetailsForm = ({onNext}) => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
         onNext();
-        
+    
     }
   return (
     <LayoutWrapper>
@@ -77,7 +77,7 @@ const UserDetailsForm = ({onNext}) => {
           <button
             type="submit"
             onClick={handleSubmit}
-            className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg mb-4"
+            className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg mb-4 hover:bg-gray-800"
           >
             Proceed
           </button>
