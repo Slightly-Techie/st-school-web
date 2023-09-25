@@ -31,11 +31,11 @@ function LoginForm() {
     setPassword('')
   }
   return (
-    <div className="flex flex-col justify-center items-start p-3 md:pl-[8rem] mx-auto max-w-[100dvw] md:w-[70dvw] h-screen relative ">
+    <div className="flex flex-col justify-center items-start p-3 md:px-[7rem] mx-auto md:ml-20 max-w-[100dvw] md:w-[80dvw] h-screen relative ">
       <img
         src={logo}
         alt="SlightlyTechie's logo"
-        className="mb-4 md:my-0 absolute top-[5.5rem] left-2 md:top-5 md:left-10"
+        className="mb-4 md:my-0 absolute top-[5.5rem] left-2 md:top-5 md:left-6"
       />
       <LoginHeading />
       <form
@@ -58,7 +58,7 @@ function LoginForm() {
           <input
             type={type}
             name="password"
-            placeholder="pass********"
+            placeholder="•••••••••••••"
             className="outline-none h-10 p-2 rounded-lg outline outline-1 outline-[#444444]"
             value={password.trim()}
             onChange={(e) => setPassword(e.target.value)}
