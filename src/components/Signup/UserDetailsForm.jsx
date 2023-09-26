@@ -1,16 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import LayoutWrapper from './components/LayoutWrapper';
+import { Link } from 'react-router-dom'
+import LayoutWrapper from './components/LayoutWrapper'
 
-const UserDetailsForm = ({onNext}) => {
-
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        onNext();
-    }
+const UserDetailsForm = ({ onNext }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    onNext()
+  }
   return (
     <LayoutWrapper>
-      <form >
+      <form>
         <div className="mb-4">
           <label
             htmlFor="fullName"
@@ -83,14 +82,14 @@ const UserDetailsForm = ({onNext}) => {
         <div className="pb-3">
           <p>
             <span>Already have an account?</span>
-            <Link to={"/login"} className="font-semibold ml-2">
+            <Link to={'/'} className="font-semibold ml-2">
               Sign in
             </Link>
           </p>
         </div>
       </form>
     </LayoutWrapper>
-  );
+  )
 }
 
 export default UserDetailsForm
