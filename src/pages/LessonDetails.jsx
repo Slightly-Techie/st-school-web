@@ -12,24 +12,24 @@ const LessonDetails = () => {
   const [currentSection, setCurrentSection] = useState(0)
 
   return (
-    <main className="py-5 ">
+    <main className="py-5">
       <LessonDetailBreadCrumb title={course_title} />
       <LessonHeading title={course_title} para="Prof. Nana Kwesi Asante" />
 
-      <section className="flex overlfow-auto h-screen items-start py-4">
-        <article className="w-[120rem] border-r pr-3">
-          <div className="w-full h-[28rem] overflow-hidden bg-gray-200">
+      <section className="flex flex-col md:flex-row overflow-hidden md:h-screen md:items-start py-4">
+        <article className="w-[120rem] border-r md:pr-3">
+          <div className="w-[19rem] md:w-full h-auto overflow-hidden bg-gray-200">
             <video controls>
               <source src={testVideo} type="video/mp4" />
             </video>
           </div>
-          <div className="my-3 pr-10">
-            <div className="border-b flex items-center justify-between">
+          <div className="w-[21rem] md:w-full my-3 pr-10">
+            <div className="border-b flex items-center justify-between overflow-x-auto">
               {LessonSectionTitle.map((title, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSection(index)}
-                  className={`py-3 pr-6 text-sm font-bold ${
+                  className={`py-3 pr-2 md:pr-6 text-sm font-bold ${
                     currentSection === index
                       ? 'text-black border-b-2 border-black'
                       : 'text-[#444444]'
@@ -58,7 +58,7 @@ const LessonDetails = () => {
             </>
           </div>
         </article>
-        <aside className="pl-3">
+        <aside className="md:pl-3">
           <div className="border-b pb-3 mb-2">
             <h3 className="font-bold text-lg">About the Lesson</h3>
             <p className="text-sm text-[#444444]">
@@ -74,7 +74,7 @@ const LessonDetails = () => {
               <span>1 / 4</span>
             </p>
           </div>
-          <>
+          <div className="mt-5">
             {DUMMY_COURSE_DATA.map((course) => (
               <Link
                 to={''}
@@ -96,7 +96,7 @@ const LessonDetails = () => {
                 </div>
               </Link>
             ))}
-          </>
+          </div>
         </aside>
       </section>
     </main>
