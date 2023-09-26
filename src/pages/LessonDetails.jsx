@@ -18,8 +18,8 @@ const LessonDetails = () => {
 
       <section className="flex overlfow-auto h-screen items-start py-4">
         <article className="w-[120rem] border-r pr-3">
-          <div className="w-full overflow-hidden bg-gray-200">
-            <video autoPlay="true" controls>
+          <div className="w-full h-[28rem] overflow-hidden bg-gray-200">
+            <video controls>
               <source src={testVideo} type="video/mp4" />
             </video>
           </div>
