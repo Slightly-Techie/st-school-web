@@ -37,3 +37,33 @@ export const DUMMY_COURSE_DATA = [
     completion: '20'
   }
 ]
+
+export const COURSE_DETAILS = [
+  {
+    id: 0,
+    description_1:
+      'Some plenty text here giving us a description of the course information and what it entails. And some more text here to make it look like a real description of the course.'
+  },
+  {
+    id: 1,
+    description_1:
+      'Some plenty text here giving us reviews of the course information and what people say . And some more text here to make it look like a real reviews of the course.'
+  },
+
+  {
+    id: 2,
+    description_1:
+      'Some plenty text here giving us discussions made by students of the course and what it entails. And some more text here to make it look like a real discussion of the course. '
+  },
+
+  {
+    id: 3,
+    description_1:
+      'Some plenty text here giving us resources of the course to help students and some more text here to make it look like a real resources of the course.'
+  },
+  {
+    id: 4,
+    description_1:
+      'Some plenty text here giving us an information about the instructor of the course and what they do best. And some more text here to make it look like a real instructor of the course.'
+  }
+]

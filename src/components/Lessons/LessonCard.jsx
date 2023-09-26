@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { DUMMY_COURSE_DATA } from '../../data/dummy_couse_data'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const LessonCard = () => {
   const [data, setData] = useState(DUMMY_COURSE_DATA)
@@ -9,10 +10,11 @@ const LessonCard = () => {
     setData(DUMMY_COURSE_DATA)
   }, [])
   return (
-    <main className="pt-5 md:p-5 space-y-9">
+    <main className="pt-5 space-y-9">
       {data.map((course) => (
-        <div
-          className="flex flex-col md:flex-row space-y-4 items-center md:justify-between"
+        <Link
+          to={'/dashboard/Lessons/' + course.title}
+          className="flex bg-[#FBFBFB] rounded-lg md:p-5 flex-col md:flex-row space-y-4 items-center md:justify-between"
           key={course.id}
         >
           <div className="flex items-start md:items-center max-w-[80dvw] mx-auto md:w-[120rem] gap-3">
@@ -37,7 +39,7 @@ const LessonCard = () => {
             </div>
             <p className="text-center">{course.completion}% completed</p>
           </div>
-        </div>
+        </Link>
       ))}
     </main>
   )
