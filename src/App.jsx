@@ -10,18 +10,18 @@ import Home from './components/Dashboards/Home'
 function App() {
   return (
     <>
-    <Routes>
-      <Route path='/login' element={<Login />} />
-      <Route path='/signup' element={<Signup />} />
-      <Route path='/lessons' element={<Lessons />} />
-      <Route path='/dashboard' element={<Dashboard />}>
-        <Route path='' element={<Home/>}/>
-        <Route path='Lessons' element={<Lessons/>}/>
-      </Route>
-      <Route path='/assignments' element={<Assingments />} />
-    </Routes>
+      <Routes>
+        <Route path="/" exact element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/lessons" element={<Lessons />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="" element={<Home />} />
+          <Route path="Lessons" element={<Lessons />} />
+        </Route>
+        <Route path="/assignments" element={<Assingments />} />
+      </Routes>
     </>
   )
 }
 
-export default App;
+export default App
