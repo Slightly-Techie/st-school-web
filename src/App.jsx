@@ -5,6 +5,7 @@ import Signup from './pages/Signup'
 import Lessons from './pages/Lessons'
 import Dashboard from './pages/Dashboard'
 import Assingments from './pages/Assingments'
+import Home from './components/Dashboards/Home'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path='/signup' element={<Signup />} />
       <Route path='/lessons' element={<Lessons />} />
       <Route path='/dashboard' element={<Dashboard />}>
+        <Route path='' element={<Home/>}/>
         <Route path='Lessons' element={<Lessons/>}/>
       </Route>
       <Route path='/assignments' element={<Assingments />} />
