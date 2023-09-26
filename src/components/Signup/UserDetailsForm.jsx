@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LayoutWrapper from './components/LayoutWrapper'
+import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 
 const UserDetailsForm = ({ onNext }) => {
+  const [type, setType] = useState('password')
+
   const handleSubmit = (e) => {
     e.preventDefault()
     onNext()
@@ -40,7 +43,7 @@ const UserDetailsForm = ({ onNext }) => {
             required
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-4 relative">
           <label
             htmlFor="password"
             className="block text-gray-800 font-medium mb-2"
@@ -48,12 +51,27 @@ const UserDetailsForm = ({ onNext }) => {
             Password
           </label>
           <input
-            type="password"
-            placeholder="************"
+            type={type}
+            placeholder="•••••••••••••"
             name="password"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
           />
+          {type === 'password' ? (
+            <div
+              className="absolute right-6 top-[2.5rem] cursor-pointer"
+              onClick={() => setType('text')}
+            >
+              <BsEyeSlashFill size={24} className="text-[#444444]" />
+            </div>
+          ) : (
+            <div
+              className="absolute right-6 items-center  top-[2.5rem] cursor-pointer"
+              onClick={() => setType('password')}
+            >
+              <BsEyeFill size={24} className="text-[#444444]" />
+            </div>
+          )}
         </div>
         <div className="mb-4">
           <label
@@ -63,8 +81,8 @@ const UserDetailsForm = ({ onNext }) => {
             Confirm Password
           </label>
           <input
-            type="password"
-            placeholder="************"
+            type={type}
+            placeholder="•••••••••••••"
             name="confirmPassword"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
