@@ -1,8 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LayoutWrapper from "./components/LayoutWrapper";
+import { useState } from "react";
 
 const UserStackForm = ({onNext, onPrevious}) => {
+
+    const [techStack, setTechStack] = useState("");
+    const [languageOptions, setLanguageOptions] = useState([]);
+  
+    const handleTechStackChange = (e) => {
+      const selectedTechStack = e.target.value;
+      setTechStack(selectedTechStack);
+  
+      if (selectedTechStack === "frontend") {
+        setLanguageOptions(["JavaScript-react","JavaScript-angular","Python-django"]);
+      } else if (selectedTechStack === "backend") {
+        setLanguageOptions(["Ruby", "Python", "Java"]);
+      } else if (selectedTechStack === "Mobile") {
+        setLanguageOptions(["React-Native", "Flutter", "Swift"]);
+      }
+    };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,41 +37,46 @@ const UserStackForm = ({onNext, onPrevious}) => {
       <form>
         <div className="mb-7">
           <label
-            htmlFor="fullName"
+            htmlFor="stack"
             className="block text-gray-800 font-medium mb-2"
           >
             Tech Stack
           </label>
           <select
-            type="text"
-            id="fullName"
-            name="fullName"
-            placeholder="John Doe"
-            className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
-            required
-          >
-            <option name="frontend"> Frontend</option>
-            <option name="backend">Backend</option>
-          </select>
+          type="text"
+          id="techStack"
+          name="techStack"
+          className="border border-[#C9C9C9] focus:outline-gray-600 w-full p-2 rounded-lg"
+          required
+          value={techStack}
+          onChange={handleTechStackChange}
+        >
+          <option value=""></option>
+          <option value="frontend">Frontend</option>
+          <option value="backend">Backend</option>
+          <option value="Mobile">Mobile</option>
+        </select>
         </div>
         <div className="mb-7">
           <label
-            htmlFor="email"
+            htmlFor="language"
             className="block text-gray-800 font-medium mb-2"
           >
-            Backend Language
+            Language
           </label>
           <select
-            type="email"
-            id="email"
-            name="email"
-            className="border border-[#050505] focus:outline-gray-600  w-full p-2 rounded-lg "
-            required
-          >
-            <option name="male"> Javscript</option>
-            <option name="female">Ruby</option>
-            <option name="female">Python</option>
-          </select>
+          type="text"
+          id="language"
+          name="language"
+          className="border border-[#050505] cursor-pointer focus:outline-gray-600 w-full p-2 rounded-lg"
+          required
+        >
+          {languageOptions.map((language) => (
+            <option className="cursor-pointer" key={language} value={language.toLowerCase()}>
+              {language}
+            </option>
+          ))}
+        </select>
         </div>
         <div className="flex md:flex-row items-center flex-col gap-2">
           <button

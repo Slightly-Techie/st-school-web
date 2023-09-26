@@ -10,8 +10,8 @@ const UserDetailsForm = ({onNext}) => {
     }
   return (
     <LayoutWrapper>
-      <form>
-        <div className="mb-7">
+      <form >
+        <div className="mb-4">
           <label
             htmlFor="fullName"
             className="block text-gray-800 font-medium mb-2"
@@ -26,7 +26,7 @@ const UserDetailsForm = ({onNext}) => {
             required
           />
         </div>
-        <div className="mb-7">
+        <div className="mb-4">
           <label
             htmlFor="email"
             className="block text-gray-800 font-medium mb-2"
@@ -41,7 +41,7 @@ const UserDetailsForm = ({onNext}) => {
             required
           />
         </div>
-        <div className="mb-7">
+        <div className="mb-4">
           <label
             htmlFor="password"
             className="block text-gray-800 font-medium mb-2"
@@ -56,7 +56,7 @@ const UserDetailsForm = ({onNext}) => {
             required
           />
         </div>
-        <div className="mb-7">
+        <div className="mb-4">
           <label
             htmlFor="confirmPassword"
             className="block text-gray-800 font-medium mb-2"

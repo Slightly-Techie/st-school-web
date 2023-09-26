@@ -4,7 +4,7 @@ import LessonHeading from '../components/Lessons/LessonHeading'
 const Lessons = () => {
   return (
     <div className="lessons ">
-      <LessonHeading />
+      <LessonHeading title="Your Lessons" para="Explore all your lessons at a glance."/>
       <LessonCard />
     </div>
   )
