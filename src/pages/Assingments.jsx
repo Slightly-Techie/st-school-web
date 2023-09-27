@@ -1,8 +1,12 @@
-import React from 'react'
+import AssignmentHeading from "../components/Dashboards/AssignmentHeading"
+import AssignmentBody from "../components/Dashboards/AssignmentBody";
 
 const Assingments = () => {
   return (
-    <div>Assingments</div>
+    <section className="flex flex-col">
+        <AssignmentHeading/>
+        <AssignmentBody/>
+    </section>
   )
 }
 

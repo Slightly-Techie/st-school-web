@@ -4,7 +4,7 @@ import User from '../components/Dashboards/User';
 
 
 const Dashboard = () => {
-const [admin, setAdmin] = useState(true)
+const [admin, setAdmin] = useState(false)
 
 
   return (

@@ -7,7 +7,7 @@ const User = () => {
         { title: "Home", src: "user", gap: true,  path: "/" },
         { title: "Dashboard", src: "Chat" , path: "/" },
         { title: "Lessons",  src: "chart", path: "/Lessons"  },
-        { title: "Assignment", src: "Calendar",  path: "/" },    
+        { title: "Assignment", src: "Calendar",  path: "/Assignments" },    
       ];
 
   return (
