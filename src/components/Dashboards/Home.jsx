@@ -1,4 +1,5 @@
 import Header from '../Header'
+import DataTable from './DataTable'
 
 const Home = () => {
   const title = `Welcome Andrew`
@@ -8,6 +9,7 @@ const Home = () => {
   return (
     <div className="home">
       <Header title={title} para={para} stream={stream} duration={duration} />
+      <DataTable />
     </div>
   )
 }
