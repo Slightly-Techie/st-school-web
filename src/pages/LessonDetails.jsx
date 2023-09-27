@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import LessonHeading from '../components/Lessons/LessonHeading'
+import Header from '../components/Header'
 import LessonDetailBreadCrumb from '../components/Lessons/LessonDetailBreadCrumb'
 import { DUMMY_COURSE_DATA, COURSE_DETAILS } from '../data/dummy_couse_data'
 import { useState } from 'react'
@@ -14,7 +14,7 @@ const LessonDetails = () => {
   return (
     <main className="py-5">
       <LessonDetailBreadCrumb title={course_title} />
-      <LessonHeading title={course_title} para="Prof. Nana Kwesi Asante" />
+      <Header title={course_title} para="Prof. Nana Kwesi Asante" />
 
       <section className="flex flex-col md:flex-row overflow-hidden md:h-screen md:items-start py-4">
         <article className="w-[120rem] border-r md:pr-3">
