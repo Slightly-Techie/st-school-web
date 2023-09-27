@@ -19,7 +19,7 @@ const LessonDetails = () => {
       <section className="flex flex-col md:flex-row overflow-hidden md:h-screen md:items-start py-4">
         <article className="w-[120rem] border-r md:pr-3">
           <div className="w-[19rem] md:w-full h-auto overflow-hidden bg-gray-200">
-            <video controls>
+            <video controls width={'100%'}>
               <source src={testVideo} type="video/mp4" />
             </video>
           </div>
@@ -29,7 +29,7 @@ const LessonDetails = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentSection(index)}
-                  className={`py-3 pr-2 md:pr-6 text-sm font-bold ${
+                  className={`py-3 pr-2 md:pr-5 text-sm font-bold ${
                     currentSection === index
                       ? 'text-black border-b-2 border-black'
                       : 'text-[#444444]'
@@ -71,31 +71,40 @@ const LessonDetails = () => {
             <h3 className="font-bold text-lg">{course_title}</h3>
             <p className="text-[#444444] text-sm">
               <span>Prof. Nana Kwesi Asante - </span>
-              <span>1 / 4</span>
+              <span>
+                1 /{' '}
+                {DUMMY_COURSE_DATA.map(
+                  (lesson) => lesson.lessons && lesson.lessons.length
+                )}
+              </span>
             </p>
           </div>
           <div className="mt-5">
-            {DUMMY_COURSE_DATA.map((course) => (
-              <Link
-                to={''}
-                key={course.id}
-                className=" flex items-center mt-2 mb-2 rounded-md px-2  bg-black"
-              >
-                <div className="flex px-1 my-3">
-                  <img
-                    src={course.img}
-                    alt=""
-                    className="h-8 w-8 object-cover "
-                  />
-                </div>
-                <div className="flex flex-col px-1">
-                  <h4 className="text-sm  text-white font-bold">
-                    {course.title}
-                  </h4>
-                  <p className="text-white text-xs">{course.desc}</p>
-                </div>
-              </Link>
-            ))}
+            {DUMMY_COURSE_DATA.map(
+              (course) =>
+                course.lessons &&
+                course.lessons.map((lesson) => (
+                  <Link
+                    to={''}
+                    key={lesson.id}
+                    className=" flex items-center mt-2 mb-2 rounded-md px-2  bg-black"
+                  >
+                    <div className="flex px-1 my-3">
+                      <img
+                        src={lesson.img}
+                        alt=""
+                        className="h-8 w-8 object-cover "
+                      />
+                    </div>
+                    <div className="flex flex-col px-1">
+                      <h4 className="text-sm  text-white font-bold">
+                        {lesson.title}
+                      </h4>
+                      <p className="text-white text-xs">{lesson.desc}</p>
+                    </div>
+                  </Link>
+                ))
+            )}
           </div>
         </aside>
       </section>

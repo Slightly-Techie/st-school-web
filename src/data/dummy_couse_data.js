@@ -6,7 +6,27 @@ export const DUMMY_COURSE_DATA = [
     title: 'React',
     img: courseImage,
     desc: 'Dive in and learn React.js from scratch!',
-    completion: '0'
+    completion: '0',
+    lessons: [
+      {
+        id: 1,
+        title: 'Lesson 1',
+        img: courseImage,
+        desc: "Let's learn wai"
+      },
+      {
+        id: 2,
+        title: 'Lesson 2',
+        img: courseImage,
+        desc: "Let's learn wai 2"
+      },
+      {
+        id: 3,
+        title: 'Lesson 3',
+        img: courseImage,
+        desc: "Let's learn wai 3"
+      }
+    ]
   },
   {
     id: 2,
