@@ -1,4 +1,4 @@
-import LessonHeading from '../Lessons/LessonHeading'
+import Header from '../Header'
 
 const Home = () => {
   const title = `Welcome Andrew`
@@ -7,12 +7,7 @@ const Home = () => {
   const duration = `90d`
   return (
     <div className="home">
-      <LessonHeading
-        title={title}
-        para={para}
-        stream={stream}
-        duration={duration}
-      />
+      <Header title={title} para={para} stream={stream} duration={duration} />
     </div>
   )
 }
