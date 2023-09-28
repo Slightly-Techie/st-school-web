@@ -1,6 +1,5 @@
-import React from "react";
-import SignupForm from "../components/Signup/SignupForm";
-import Background from "../assets/backgroundImage.jpg";
+import SignupForm from '../components/Signup/SignupForm'
+import Background from '../assets/backgroundImage.jpg'
 
 const Signup = () => {
   return (
@@ -17,7 +16,7 @@ const Signup = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup
