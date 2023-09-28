@@ -6,7 +6,8 @@ import Lessons from './pages/Lessons'
 import Dashboard from './pages/Dashboard'
 import Assingments from './pages/Assingments'
 import Home from './components/Dashboards/Home'
-import LessonDetails from './pages/LessonDetails'
+import LessonDetails from './pages/LessonDetails';
+import AssignmentDetails from './pages/AssignmentDetails'
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="Lessons" element={<Lessons />} />
           <Route path="Lessons/:course_title" element={<LessonDetails />} />
           <Route path='Assignments' element={<Assingments />} />
-          <Route path='Assignments/:id' element={<h1>Single Assignment</h1>} />
+          <Route path='Assignments/:id' element={<AssignmentDetails/>} />
         </Route>
         <Route path="/assignments" element={<Assingments />} />
       </Routes>
