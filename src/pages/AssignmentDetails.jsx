@@ -1,47 +1,68 @@
-import { useState } from "react";
-
+import { useState } from 'react'
+import Header from '../components/Header'
+import BasicBreadcrumbs from '../components/BreadCrumbs'
+import { useParams } from 'react-router-dom'
+import { ASSIGNMENT_TABS_TITLE } from '../utils/tabs'
+import { ASSIGNMENT_TABS } from '../data/dummy_assignment_data'
 
 const AssignmentDetails = () => {
-    const [tab, setTab] = useState('description');
+  const { assignment_title } = useParams()
+  const [currentTab, setCurrentTab] = useState(0)
 
-    const DescfontStyle = tab === 'description' ? 'font-medium' : 'text-gray-600';
-    const ResfontStyle = tab === 'resource' ? 'font-medium' : 'text-gray-600'
-
-    const toogleTab = () => {
-        if (tab === 'description') {
-            setTab('resource')
-        } else {
-            setTab('description')
-        }
-    }
-
-
-    return (
-        <section className="flex flex-col ">
-            <div className="border-b py-3">
-                <h3 className="text-lg text-gray-600">Assignments / <span className="text-lg font-medium text-black">Basic Linux Commands</span></h3>
-                <h1 className="mt-2 mb-1 font-medium  text-xl">Assignment 1 - Basic Linux Commands</h1>
-                <p className="text-gray-600 font-medium text-15px">Prof. Nana Kwesi Asante</p>
-            </div>
-            <div className="flex justify-between mt-6">
-                <div className="w-3/4 flex flex-col border-r-2">
-                    <div className="flex border-b-2 pb-3 mr-4 text-15px">
-                        <p className={` mr-64 cursor-pointer ${DescfontStyle}`} onClick={toogleTab}>Description</p>
-                        <p className={`text-gray-600 cursor-pointer ${ResfontStyle}`} onClick={toogleTab}>Resources</p>
-                    </div>
-                    <div className="mt-4 text-gray-600 text-15px mr-4">
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.Duis aute irure dolor in reprehenderit in voluptate velit </p>
-                    </div>
-                </div>    
-                <div className=" w-1/4 flex flex-col pl-2"> 
-                    <h1 className="font-medium text-15px mb-2">Course Objective</h1>
-                    <p className="text-15px text-gray-600">
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
-                    </p>
-                </div>
-            </div>            
-        </section>
-    )
-};
+  return (
+    <section className="flex flex-col ">
+      <div className="py-3">
+        <BasicBreadcrumbs
+          title={assignment_title}
+          prevRoutePath={'/Dashboard/Assignments'}
+          prevRouteTitle={'Assignments '}
+        />
+        <Header title={assignment_title} para={'Prof. Nana Kwesi Asante'} />
+      </div>
+      <div className="flex flex-col md:flex-row justify-between mt-6">
+        <div className="md:w-3/4 flex flex-col  border-b md:border-b-0 md:border-r-2 md:pr-14">
+          <div className="flex items-center justify-between ">
+            {ASSIGNMENT_TABS_TITLE.map((title, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentTab(index)}
+                className={`md:py-3 pr-2 md:pr-5 text-sm font-bold ${
+                  currentTab === index
+                    ? 'text-black border-b-2 border-black'
+                    : 'text-[#444444]'
+                }`}
+              >
+                {title}
+              </button>
+            ))}
+          </div>
+          <>
+            {/* Render Section based on #id */}
+            {ASSIGNMENT_TABS.map((section) => (
+              <div
+                key={section.id}
+                className={`py-4 ${
+                  currentTab === section.id ? 'block' : 'hidden'
+                }`}
+              >
+                <h3 className="font-bold text-lg">{section.title}</h3>
+                <p className="text-sm text-[#444444]">{section.description}</p>
+                <br />
+              </div>
+            ))}
+          </>
+        </div>
+        <div className=" md:w-1/4 flex flex-col pl-2 mt-4 md:mt-0">
+          <h1 className="font-medium text-15px mb-2">Course Objective</h1>
+          <p className="text-15px text-gray-600">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export default AssignmentDetails
