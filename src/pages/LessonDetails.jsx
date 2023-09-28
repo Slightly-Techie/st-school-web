@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom'
 import Header from '../components/Header'
-import LessonDetailBreadCrumb from '../components/Lessons/LessonDetailBreadCrumb'
 import { DUMMY_COURSE_DATA, COURSE_DETAILS } from '../data/dummy_couse_data'
 import { useState } from 'react'
-import { LessonSectionTitle } from '../utils/lessonSectionTitle'
+import { LESSON_TABS_TITLE } from '../utils/tabs'
 import testVideo from '../assets/Test_Video.mp4'
+import BasicBreadcrumbs from '../components/BreadCrumbs'
 
 const LessonDetails = () => {
   const { course_title } = useParams()
@@ -13,7 +13,12 @@ const LessonDetails = () => {
 
   return (
     <main className="py-5">
-      <LessonDetailBreadCrumb title={course_title} />
+      {/* <LessonDetailBreadCrumb title={course_title} /> */}
+      <BasicBreadcrumbs
+        title={course_title}
+        prevRoutePath={'/Dashboard/Lessons'}
+        prevRouteTitle={'Lessons'}
+      />
       <Header title={course_title} para="Prof. Nana Kwesi Asante" />
 
       <section className="flex flex-col md:flex-row overflow-hidden md:h-screen md:items-start py-4">
@@ -25,7 +30,7 @@ const LessonDetails = () => {
           </div>
           <div className="w-[21rem] md:w-full my-3 pr-10">
             <div className="border-b flex items-center justify-between overflow-x-auto">
-              {LessonSectionTitle.map((title, index) => (
+              {LESSON_TABS_TITLE.map((title, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSection(index)}
