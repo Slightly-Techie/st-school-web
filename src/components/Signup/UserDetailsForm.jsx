@@ -13,20 +13,37 @@ const UserDetailsForm = ({ onNext }) => {
   return (
     <LayoutWrapper>
       <form>
-        <div className="mb-4">
-          <label
-            htmlFor="fullName"
-            className="block text-gray-800 font-medium mb-2"
-          >
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            placeholder="John Doe"
-            className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
-            required
-          />
+        <div className="mb-4 grid grid-cols-2 gap-4">
+          <div className="firstname">
+            <label
+              htmlFor="firstName"
+              className="block text-gray-800 font-medium mb-2"
+            >
+              First Name
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              placeholder="John"
+              className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
+              required
+            />
+          </div>
+          <div className="lastname">
+            <label
+              htmlFor="LastName"
+              className="block text-gray-800 font-medium mb-2"
+            >
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              placeholder="Doe"
+              className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
+              required
+            />
+          </div>
         </div>
         <div className="mb-4">
           <label
