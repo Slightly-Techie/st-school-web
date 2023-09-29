@@ -1,18 +1,40 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import LayoutWrapper from './components/LayoutWrapper'
-import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import LayoutWrapper from "./components/LayoutWrapper";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+import { useForm } from "react-hook-form";
 
-const UserDetailsForm = ({ onNext }) => {
-  const [type, setType] = useState('password')
+const UserDetailsForm = ({ onNext, formInput }) => {
+  const [type, setType] = useState("password");
+  const [confirmPassword, setConfirmPassword] = useState('')
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    onNext()
-  }
+  const [userDetail, setUserDetail] = formInput;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+
+  /*
+    validation checks 
+    -> check if password is same as confirm password -> return error msg
+    -> check if email is a valid email type and not empty
+    -> check if password is a strong password type and return error or success msg
+    -> All should probably have a min length and a maxLength
+  */
+
+  const onSubmit = (data) => {
+    console.log("data is  ", data);
+    console.log("confirm password ", confirmPassword)
+    setUserDetail(data);
+    onNext();
+  };
+
   return (
     <LayoutWrapper>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4 grid grid-cols-2 gap-4">
           <div className="firstname">
             <label
@@ -27,6 +49,8 @@ const UserDetailsForm = ({ onNext }) => {
               placeholder="John"
               className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
               required
+              {...register("firstname", { required: true })}
+              defaultValue={userDetail?.firstname}
             />
           </div>
           <div className="lastname">
@@ -42,6 +66,8 @@ const UserDetailsForm = ({ onNext }) => {
               placeholder="Doe"
               className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
               required
+              {...register("lastname", { required: true })}
+              defaultValue={userDetail?.lastname}
             />
           </div>
         </div>
@@ -58,6 +84,8 @@ const UserDetailsForm = ({ onNext }) => {
             name="email"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
+            {...register("email", { required: true })}
+            defaultValue={userDetail?.email}
           />
         </div>
         <div className="mb-4 relative">
@@ -73,22 +101,22 @@ const UserDetailsForm = ({ onNext }) => {
             name="password"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
+            {...register("password", { required: true })}
+            defaultValue={userDetail?.password}
           />
-          {type === 'password' ? (
-            <div
-              className="absolute right-6 top-[2.5rem] cursor-pointer"
-              onClick={() => setType('text')}
-            >
+
+          <div
+            className="absolute right-6 top-[2.5rem] cursor-pointer"
+            onClick={() =>
+              type === "password" ? setType("text") : setType("password")
+            }
+          >
+            {type === "password" ? (
               <BsEyeSlashFill size={24} className="text-[#444444]" />
-            </div>
-          ) : (
-            <div
-              className="absolute right-6 items-center  top-[2.5rem] cursor-pointer"
-              onClick={() => setType('password')}
-            >
+            ) : (
               <BsEyeFill size={24} className="text-[#444444]" />
-            </div>
-          )}
+            )}
+          </div>
         </div>
         <div className="mb-4">
           <label
@@ -103,12 +131,13 @@ const UserDetailsForm = ({ onNext }) => {
             name="confirmPassword"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
           />
         </div>
         <div>
           <button
             type="submit"
-            onClick={handleSubmit}
             className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg mb-4 hover:bg-gray-800"
           >
             Proceed
@@ -117,14 +146,14 @@ const UserDetailsForm = ({ onNext }) => {
         <div className="pb-3">
           <p>
             <span>Already have an account?</span>
-            <Link to={'/'} className="font-semibold ml-2">
+            <Link to={"/"} className="font-semibold ml-2">
               Sign in
             </Link>
           </p>
         </div>
       </form>
     </LayoutWrapper>
-  )
-}
+  );
+};
 
-export default UserDetailsForm
+export default UserDetailsForm;

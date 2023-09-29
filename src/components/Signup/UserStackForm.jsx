@@ -1,41 +1,65 @@
-import { Link } from 'react-router-dom'
-import LayoutWrapper from './components/LayoutWrapper'
-import { useState } from 'react'
+import { Link } from "react-router-dom";
+import LayoutWrapper from "./components/LayoutWrapper";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
-const UserStackForm = ({ onNext, onPrevious }) => {
-  const [techStack, setTechStack] = useState('')
-  const [languageOptions, setLanguageOptions] = useState([])
+const UserStackForm = ({ onNext, onPrevious, formInput }) => {
+  
+  const [techStack, setTechStack] = useState(["frontend", "backend", "mobile"]);
+  const [languageOptions, setLanguageOptions] = useState([]);
+  const [userStackForm, setUserStacKForm] = formInput
 
-  const handleTechStackChange = (e) => {
-    const selectedTechStack = e.target.value
-    setTechStack(selectedTechStack)
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-    if (selectedTechStack === 'frontend') {
-      setLanguageOptions([
-        'JavaScript-react',
-        'JavaScript-angular',
-        'Python-django'
-      ])
-    } else if (selectedTechStack === 'backend') {
-      setLanguageOptions(['Ruby', 'Python', 'Java'])
-    } else if (selectedTechStack === 'Mobile') {
-      setLanguageOptions(['React-Native', 'Flutter', 'Swift'])
+  const watchTechStackChange = watch("techStack");
+
+  const getLanguageOptions = () => {
+    let options = [];
+    switch (watchTechStackChange) {
+      case "frontend":
+        options = ["JavaScript-react", "JavaScript-angular", "Python-django"];
+        break;
+      case "backend":
+        options = ["Ruby", "Python", "Java"];
+        break;
+      case "mobile":
+        options = ["React-Native", "Flutter", "Swift"];
+        break;
+      default:
+        options = [];
     }
-  }
+    setLanguageOptions(options);
+  };
+  
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  useEffect(() => {
+    getLanguageOptions();
+  }, [watchTechStackChange]);
+
+  /* 
+    validation to check if fields are empty
+  */
+
+
+  const onSubmit = (data) => {
+    console.log("user stack form data is ", data)
+    setUserStacKForm(data)
     onNext()
   }
 
   const handleNavigatePrevious = (e) => {
-    e.preventDefault()
-    onPrevious()
-  }
+    e.preventDefault();
+    onPrevious();
+  };
 
   return (
     <LayoutWrapper>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-7">
           <label
             htmlFor="stack"
@@ -49,15 +73,15 @@ const UserStackForm = ({ onNext, onPrevious }) => {
             name="techStack"
             className="border border-[#C9C9C9] focus:outline-gray-600 w-full p-2 rounded-lg"
             required
-            value={techStack}
-            onChange={handleTechStackChange}
+            defaultValue={UserStackForm?.techStack}
+            {...register("techStack", { required: true})}
           >
-            <option value="" disabled>
-              Please select your stack
+            <option value="" disabled hidden>
+              {" "}
+              Please select your stack{" "}
             </option>
-            <option value="frontend">Frontend</option>
-            <option value="backend">Backend</option>
-            <option value="Mobile">Mobile</option>
+            {techStack.length > 0 &&
+              techStack.map((stack) => <option key={stack} value={stack}>{stack}</option>)}
           </select>
         </div>
         <div className="mb-7">
@@ -73,8 +97,10 @@ const UserStackForm = ({ onNext, onPrevious }) => {
             name="language"
             className="border border-[#050505] cursor-pointer focus:outline-gray-600 w-full p-2 rounded-lg"
             required
+            {...register("language", { required: true })}
+            defaultValue={userStackForm?.language}
           >
-            {languageOptions.map((language) => (
+            {languageOptions.length > 0 && languageOptions.map((language) => (
               <option
                 className="cursor-pointer"
                 key={language}
@@ -104,14 +130,14 @@ const UserStackForm = ({ onNext, onPrevious }) => {
         <div className="pb-3 md:mt-4">
           <p>
             <span>Already have an account?</span>
-            <Link to={'/login'} className="font-semibold ml-2">
+            <Link to={"/login"} className="font-semibold ml-2">
               Sign in
             </Link>
           </p>
         </div>
       </form>
     </LayoutWrapper>
-  )
-}
+  );
+};
 
-export default UserStackForm
+export default UserStackForm;
