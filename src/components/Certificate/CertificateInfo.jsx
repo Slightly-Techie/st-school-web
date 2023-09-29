@@ -1,4 +1,4 @@
-import logo from '/public/st.jpg'
+import logo from '../../assets/st.jpg'
 import signature from '../../assets/Signature.png'
 
 const CertificateInfo = () => {
