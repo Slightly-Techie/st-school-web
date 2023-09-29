@@ -8,6 +8,7 @@ import Assingments from './pages/Assingments'
 import Home from './components/Dashboards/Home'
 import LessonDetails from './pages/LessonDetails'
 import AssignmentDetails from './pages/AssignmentDetails'
+import Certificate from './pages/Certificate'
 
 function App() {
   return (
@@ -25,8 +26,12 @@ function App() {
             path="Assignments/:assignment_title"
             element={<AssignmentDetails />}
           />
+          <Route
+            path="/dashboard/profile/certificate"
+            element={<Certificate />}
+          />
         </Route>
-        <Route path="/assignments" element={<Assingments />} />
+        <Route path="*" element={<h1>Page Not Found </h1>} />
       </Routes>
     </>
   )
