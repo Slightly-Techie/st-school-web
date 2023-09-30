@@ -1,5 +1,5 @@
 import logo from '../../assets/st.jpg'
-import signature from '../../assets/Signature.png'
+import signature from '../../assets/Dadson_signature.png'
 import CertificatePattern from './CertificatePattern'
 import { CERTIFICATE_INFO } from '../../data/certificate'
 
