@@ -1,6 +1,6 @@
 import CertificateTemplate from '../components/Certificate/CertificateTemplate'
 
-const Certificate = () => {
+const ViewCertificate = () => {
   return (
     <div className="container flex justify-center mx-auto">
       <CertificateTemplate />
@@ -8,4 +8,4 @@ const Certificate = () => {
   )
 }
 
-export default Certificate
+export default ViewCertificate

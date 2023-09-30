@@ -17,7 +17,7 @@ const UserPaymentForm = ({ onNext, onPrevious, formInput, formData }) => {
   const onSubmit = (data) => {
 
     setPaymentForm(data);
-    const userData = {...formData, ...data}
+    const userData = { ...formData, ...data };
     console.log("user payment data ", userData);
 
     makePayments(userData).then(responseData =>  {
@@ -49,6 +49,11 @@ const UserPaymentForm = ({ onNext, onPrevious, formInput, formData }) => {
             {...register("paymentType", { required: true })}
             defaultValue={paymentForm?.paymentType}
           >
+            <option value="" disabled>
+              Select Payment Type
+            </option>
+            <option name="partial">Partial Payment &#40;GHC 100/m&#41;</option>
+            <option name="full">Full Payment &#40;GHC 300/m&#41;</option>
             <option name="partial" value="Part">Partial Payment &#40;GHC 100/m&#41;</option>
             <option name="full" value="Full">Full Payment &#40;GHC 300/m&#41;</option>
           </select>
@@ -65,6 +70,9 @@ const UserPaymentForm = ({ onNext, onPrevious, formInput, formData }) => {
             {...register("paymentOption", { required: true })}
             defaultValue={paymentForm?.paymentOption}
           >
+            <option value="" disabled>
+              Select Payment Option
+            </option>
             <option value="mtn">MTN Mobile Money</option>
             <option value="vodafone">Vodafone Cash</option>
           </select>
@@ -75,12 +83,22 @@ const UserPaymentForm = ({ onNext, onPrevious, formInput, formData }) => {
           </label>
           <input
             type="text"
-            name="password"
+            name="phone"
             placeholder="024-736-9812"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
-            {...register("phoneNumber", { required: true })}
+            {...register("phoneNumber", {
+              required: "Enter a valid phone number",
+              maxLength: {value: 10, message:"Should be a 10 digit number"},
+              pattern: {
+                value: /^0\d{9}$/,
+                message: "Enter a valid phone number",
+              },
+            })}
             defaultValue={paymentForm?.phoneNumber}
           />
+          {errors.phoneNumber && (
+            <p className="text-red-600">{errors.phoneNumber.message}</p>
+          )}
         </div>
         <div className="flex md:flex-row items-center  flex-col gap-2">
           <button

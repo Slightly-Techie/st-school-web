@@ -10,6 +10,7 @@ import LessonDetails from './pages/LessonDetails'
 import AssignmentDetails from './pages/AssignmentDetails'
 import Certificate from './pages/Certificate'
 import PaymentSuccess from './components/Signup/PaymentSuccess'
+import ViewCertificate from './pages/ViewCertificate'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             element={<Certificate />}
           />
         </Route>
+        <Route path="/view/user/certificate" element={<ViewCertificate />} />
         <Route path="*" element={<h1>Page Not Found </h1>} />
       </Routes>
     </>

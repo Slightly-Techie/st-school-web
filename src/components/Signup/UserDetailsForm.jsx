@@ -6,28 +6,22 @@ import { useForm } from "react-hook-form";
 
 const UserDetailsForm = ({ onNext, formInput }) => {
   const [type, setType] = useState("password");
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [userDetail, setUserDetail] = formInput;
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
 
-
-  /*
-    validation checks 
-    -> check if password is same as confirm password -> return error msg
-    -> check if email is a valid email type and not empty
-    -> check if password is a strong password type and return error or success msg
-    -> All should probably have a min length and a maxLength
-  */
+  
 
   const onSubmit = (data) => {
     console.log("data is  ", data);
-    console.log("confirm password ", confirmPassword)
+    console.log("confirm password ", confirmPassword);
     setUserDetail(data);
     onNext();
   };
@@ -79,14 +73,23 @@ const UserDetailsForm = ({ onNext, formInput }) => {
             Email
           </label>
           <input
-            type="email"
+            type="text"
             placeholder="example@gmail.com"
             name="email"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
-            {...register("email", { required: true })}
+            {...register("email", {
+              required: true,
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "invalid email address",
+              },
+            })}
             defaultValue={userDetail?.email}
           />
+          {errors.email && (
+            <p className="text-red-600">{errors.email.message}</p>
+          )}
         </div>
         <div className="mb-4 relative">
           <label
@@ -101,7 +104,18 @@ const UserDetailsForm = ({ onNext, formInput }) => {
             name="password"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
-            {...register("password", { required: true })}
+            {...register("password", {
+              required: true,
+              minLength: {
+                value: 8,
+                message: "Password must have at least 8 characters",
+              },
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                message:
+                  "Password must contain at least one uppercase letter, one lowercase letter, and one number.",
+              },
+            })}
             defaultValue={userDetail?.password}
           />
 
@@ -117,6 +131,9 @@ const UserDetailsForm = ({ onNext, formInput }) => {
               <BsEyeFill size={24} className="text-[#444444]" />
             )}
           </div>
+          {errors.password && (
+            <p className="text-red-600">{errors.password.message}</p>
+          )}
         </div>
         <div className="mb-4">
           <label
@@ -131,9 +148,19 @@ const UserDetailsForm = ({ onNext, formInput }) => {
             name="confirmPassword"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
-            value={confirmPassword}
-            onChange={e => setConfirmPassword(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            {...register("confirmPassword", {
+              required: true,
+              validate: (val) => {
+                const { password } = getValues();
+                return password === val || "Passwords do not match!";
+              },
+            })}
+            defaultValue={userDetail?.confirmPassword}
           />
+          {errors.confirmPassword && (
+            <p className="text-red-600">{errors.confirmPassword.message}</p>
+          )}
         </div>
         <div>
           <button
