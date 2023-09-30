@@ -9,6 +9,7 @@ import Home from './components/Dashboards/Home'
 import LessonDetails from './pages/LessonDetails'
 import AssignmentDetails from './pages/AssignmentDetails'
 import Certificate from './pages/Certificate'
+import PaymentSuccess from './components/Signup/PaymentSuccess'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/signup/redirect" element={<PaymentSuccess />} />
         <Route path="/lessons" element={<Lessons />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Home />} />

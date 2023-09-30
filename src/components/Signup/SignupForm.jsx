@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import UserDetailsForm from "./UserDetailsForm";
 import UserStackForm from "./UserStackForm";
 import UserPaymentForm from "./UserPaymentForm";
-import PaymentSuccess from "./PaymentSuccess";
 
 const SignupForm = () => {
   const [page, setPage] = useState(0);
@@ -17,8 +16,8 @@ const SignupForm = () => {
     password: "",
   });
 
-  const [userStackForm, setUserStacKForm] = useState({
-    techStack: "",
+  const [userStackForm, setUserStackForm] = useState({
+    stack: "",
     language: "",
   });
 
@@ -37,7 +36,7 @@ const SignupForm = () => {
     ),
     1: (
       <UserStackForm
-        formInput={[userStackForm, setUserStacKForm]}
+        formInput={[userStackForm, setUserStackForm]}
         onNext={navigateToNextPage}
         onPrevious={navigateToPreviousPage}
       />
@@ -50,7 +49,6 @@ const SignupForm = () => {
         onPrevious={navigateToPreviousPage}
       />
     ),
-    3: <PaymentSuccess />,
   };
 
   return (

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LayoutWrapper from "./components/LayoutWrapper";
 import { useForm } from "react-hook-form";
+import { makePayments } from "./api/SignupApi";
 
 const UserPaymentForm = ({ onNext, onPrevious, formInput, formData }) => {
   const [paymentForm, setPaymentForm] = formInput;
@@ -12,19 +13,18 @@ const UserPaymentForm = ({ onNext, onPrevious, formInput, formData }) => {
     formState: { errors },
   } = useForm();
 
-  /* 
-    validation checks 
-    -> phone number must be valid phone number - length, type etc
-    -> fields must not be empty...
-  */
 
   const onSubmit = (data) => {
 
-    // every data in this form ends up here...
     setPaymentForm(data);
     const userData = {...formData, ...data}
     console.log("user payment data ", userData);
-    onNext()
+
+    makePayments(userData).then(responseData =>  {
+
+    })
+    .catch(err => console.warn(err))
+
   };
 
   const handleNavigatePrevious = (e) => {
@@ -49,8 +49,8 @@ const UserPaymentForm = ({ onNext, onPrevious, formInput, formData }) => {
             {...register("paymentType", { required: true })}
             defaultValue={paymentForm?.paymentType}
           >
-            <option name="partial">Partial Payment &#40;GHC 100/m&#41;</option>
-            <option name="full">Full Payment &#40;GHC 300/m&#41;</option>
+            <option name="partial" value="Part">Partial Payment &#40;GHC 100/m&#41;</option>
+            <option name="full" value="Full">Full Payment &#40;GHC 300/m&#41;</option>
           </select>
         </div>
         <div className="mb-7">
