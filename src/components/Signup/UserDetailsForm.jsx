@@ -6,9 +6,8 @@ import { useForm } from "react-hook-form";
 
 const UserDetailsForm = ({ onNext, formInput }) => {
   const [type, setType] = useState("password");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [userDetail, setUserDetail] = formInput;
+  const [userForm, setUserForm] = formInput;
 
   const {
     register,
@@ -20,9 +19,12 @@ const UserDetailsForm = ({ onNext, formInput }) => {
   
 
   const onSubmit = (data) => {
-    console.log("data is  ", data);
-    console.log("confirm password ", confirmPassword);
-    setUserDetail(data);
+
+    // remove the confirmPassword before submiting
+    delete data.confirmPassword
+
+    const userDetailForm = {...userForm, ...data}
+    setUserForm({...userDetailForm})
     onNext();
   };
 
@@ -44,7 +46,7 @@ const UserDetailsForm = ({ onNext, formInput }) => {
               className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
               required
               {...register("firstname", { required: true })}
-              defaultValue={userDetail?.firstname}
+              defaultValue={userForm?.firstname || ''}
             />
           </div>
           <div className="lastname">
@@ -61,7 +63,7 @@ const UserDetailsForm = ({ onNext, formInput }) => {
               className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
               required
               {...register("lastname", { required: true })}
-              defaultValue={userDetail?.lastname}
+              defaultValue={userForm?.lastname || ''}
             />
           </div>
         </div>
@@ -85,7 +87,7 @@ const UserDetailsForm = ({ onNext, formInput }) => {
                 message: "invalid email address",
               },
             })}
-            defaultValue={userDetail?.email}
+            defaultValue={userForm?.email || ''}
           />
           {errors.email && (
             <p className="text-red-600">{errors.email.message}</p>
@@ -116,7 +118,7 @@ const UserDetailsForm = ({ onNext, formInput }) => {
                   "Password must contain at least one uppercase letter, one lowercase letter, and one number.",
               },
             })}
-            defaultValue={userDetail?.password}
+            defaultValue={userForm?.password || ''}
           />
 
           <div
@@ -148,7 +150,6 @@ const UserDetailsForm = ({ onNext, formInput }) => {
             name="confirmPassword"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
-            onChange={(e) => setConfirmPassword(e.target.value)}
             {...register("confirmPassword", {
               required: true,
               validate: (val) => {
@@ -156,7 +157,7 @@ const UserDetailsForm = ({ onNext, formInput }) => {
                 return password === val || "Passwords do not match!";
               },
             })}
-            defaultValue={userDetail?.confirmPassword}
+            defaultValue={userForm?.confirmPassword || ''}
           />
           {errors.confirmPassword && (
             <p className="text-red-600">{errors.confirmPassword.message}</p>

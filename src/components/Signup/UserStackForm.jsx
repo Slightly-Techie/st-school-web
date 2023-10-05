@@ -2,59 +2,40 @@ import { Link } from "react-router-dom";
 import LayoutWrapper from "./components/LayoutWrapper";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { fetchTechStack } from "./api/SignupApi";
+import { toast } from 'react-hot-toast'
 
 const UserStackForm = ({ onNext, onPrevious, formInput }) => {
-  
-  const [techStack, setTechStack] = useState(["frontend", "backend", "mobile"]);
-  const [languageOptions, setLanguageOptions] = useState([]);
-  const [userStackForm, setUserStacKForm] = formInput
+  const [techStackApi, setTechStackApi] = useState([]);
+  const [selectedTechStack, setSelectedTechStack] = useState(null);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const [userForm, setUserForm] = formInput;
 
-  const watchTechStackChange = watch("techStack");
-
-  const getLanguageOptions = () => {
-    let options = [];
-    switch (watchTechStackChange) {
-      case "frontend":
-        options = ["JavaScript-react", "JavaScript-angular", "Python-django"];
-        break;
-      case "backend":
-        options = ["Ruby", "Python", "Java"];
-        break;
-      case "mobile":
-        options = ["React-Native", "Flutter", "Swift"];
-        break;
-      default:
-        options = [];
-    }
-    setLanguageOptions(options);
-  };
-  
-
-  useEffect(() => {
-    getLanguageOptions();
-  }, [watchTechStackChange]);
-
-  /* 
-    validation to check if fields are empty
-  */
-
+  const { register, handleSubmit, watch, setValue } = useForm();
 
   const onSubmit = (data) => {
-    console.log("user stack form data is ", data)
-    setUserStacKForm(data)
-    onNext()
-  }
+    const techStackFormDetails = { ...userForm, ...data };
+    setUserForm({ ...techStackFormDetails });
+    onNext();
+  };
 
-  const handleNavigatePrevious = (e) => {
-    e.preventDefault();
-    onPrevious();
+  useEffect(() => {
+    fetchTechStack()
+      .then((responseData) => {
+        setTechStackApi(responseData);
+
+        if (userForm?.stack) {
+          setSelectedTechStack(userForm.stack);
+          setValue("stack", userForm.stack);
+        }
+      })
+      .catch((err) => toast.error(err));
+  }, []);
+
+
+  const handleTechStackChange = (selectedStack) => {
+    setSelectedTechStack(selectedStack);
+    setValue("stack", selectedStack);
   };
 
   return (
@@ -73,15 +54,18 @@ const UserStackForm = ({ onNext, onPrevious, formInput }) => {
             name="techStack"
             className="border border-[#C9C9C9] focus:outline-gray-600 w-full p-2 rounded-lg"
             required
-            defaultValue={UserStackForm?.techStack}
-            {...register("techStack", { required: true})}
+            onChange={(e) => handleTechStackChange(e.target.value)}
+            value={selectedTechStack || ""}
           >
-            <option value="" disabled hidden>
-              {" "}
-              Please select your stack{" "}
+            <option value="" disabled>
+              Please select your stack
             </option>
-            {techStack.length > 0 &&
-              techStack.map((stack) => <option key={stack} value={stack}>{stack}</option>)}
+            {techStackApi.length > 0 &&
+              techStackApi.map((stack) => (
+                <option key={stack?.name} value={stack?.name}>
+                  {stack?.name}
+                </option>
+              ))}
           </select>
         </div>
         <div className="mb-7">
@@ -98,30 +82,34 @@ const UserStackForm = ({ onNext, onPrevious, formInput }) => {
             className="border border-[#050505] cursor-pointer focus:outline-gray-600 w-full p-2 rounded-lg"
             required
             {...register("language", { required: true })}
-            defaultValue={userStackForm?.language}
           >
-            {languageOptions.length > 0 && languageOptions.map((language) => (
-              <option
-                className="cursor-pointer"
-                key={language}
-                value={language.toLowerCase()}
-              >
-                {language}
-              </option>
-            ))}
+            {selectedTechStack &&
+              techStackApi
+                .find((stack) => stack?.name === selectedTechStack)
+                ?.stack_options.map((language) => (
+                  <option
+                    className="cursor-pointer"
+                    key={language?.name}
+                    value={language?.name.toLowerCase()}
+                  >
+                    {language?.name}
+                  </option>
+                ))}
           </select>
         </div>
         <div className="flex md:flex-row items-center flex-col gap-2">
           <button
-            type="submit"
-            onClick={handleNavigatePrevious}
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              onPrevious();
+            }}
             className="bg-white text-black border border-gray-500 px-4 py-2 w-full rounded-lg hover:border-gray-900"
           >
             Go Back
           </button>
           <button
             type="submit"
-            onClick={handleSubmit}
             className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg md:mb-0 border border-gray-900 mb-4 hover:bg-gray-800"
           >
             Proceed
