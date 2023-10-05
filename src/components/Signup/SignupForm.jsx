@@ -9,43 +9,25 @@ const SignupForm = () => {
   const navigateToNextPage = () => setPage(page + 1);
   const navigateToPreviousPage = () => setPage(page - 1);
 
-  const [userDetail, setUserDetail] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
-  });
-
-  const [userStackForm, setUserStackForm] = useState({
-    stack: "",
-    language: "",
-  });
-
-  const [paymentForm, setPaymentForm] = useState({
-    paymentType: "",
-    paymentOption: "",
-    phoneNumber: "",
-  });
+  const [userForm, setUserForm] = useState({})
 
   const pageComponents = {
     0: (
       <UserDetailsForm
-        formInput={[userDetail, setUserDetail]}
+        formInput={[userForm, setUserForm]}
         onNext={navigateToNextPage}
       />
     ),
     1: (
       <UserStackForm
-        formInput={[userStackForm, setUserStackForm]}
+        formInput={[userForm, setUserForm]}
         onNext={navigateToNextPage}
         onPrevious={navigateToPreviousPage}
       />
     ),
     2: (
       <UserPaymentForm
-        formInput={[paymentForm, setPaymentForm]}
-        formData={{ ...userDetail, ...userStackForm}}
-        onNext={navigateToNextPage}
+        formInput={[userForm, setUserForm]}
         onPrevious={navigateToPreviousPage}
       />
     ),

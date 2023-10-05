@@ -3,38 +3,40 @@ import LayoutWrapper from "./components/LayoutWrapper";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { fetchTechStack } from "./api/SignupApi";
+import { toast } from 'react-hot-toast'
 
 const UserStackForm = ({ onNext, onPrevious, formInput }) => {
   const [techStackApi, setTechStackApi] = useState([]);
+  const [selectedTechStack, setSelectedTechStack] = useState(null);
 
-  const [userStackForm, setUserStackForm] = formInput;
+  const [userForm, setUserForm] = formInput;
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-  const watchTechStackChange = watch("stack");
+  const { register, handleSubmit, watch, setValue } = useForm();
 
   const onSubmit = (data) => {
-    setUserStackForm(data);
+    const techStackFormDetails = { ...userForm, ...data };
+    setUserForm({ ...techStackFormDetails });
     onNext();
   };
 
-  const handleNavigatePrevious = (e) => {
-    e.preventDefault();
-    onPrevious();
-  };
-
   useEffect(() => {
-
     fetchTechStack()
-      .then((responseData) => setTechStackApi(responseData))
-      .catch((err) => console.error(err));
+      .then((responseData) => {
+        setTechStackApi(responseData);
 
+        if (userForm?.stack) {
+          setSelectedTechStack(userForm.stack);
+          setValue("stack", userForm.stack);
+        }
+      })
+      .catch((err) => toast.error(err));
   }, []);
+
+
+  const handleTechStackChange = (selectedStack) => {
+    setSelectedTechStack(selectedStack);
+    setValue("stack", selectedStack);
+  };
 
   return (
     <LayoutWrapper>
@@ -52,8 +54,8 @@ const UserStackForm = ({ onNext, onPrevious, formInput }) => {
             name="techStack"
             className="border border-[#C9C9C9] focus:outline-gray-600 w-full p-2 rounded-lg"
             required
-            defaultValue={userStackForm?.stack}
-            {...register("stack", { required: true })}
+            onChange={(e) => handleTechStackChange(e.target.value)}
+            value={selectedTechStack || ""}
           >
             <option value="" disabled>
               Please select your stack
@@ -80,11 +82,10 @@ const UserStackForm = ({ onNext, onPrevious, formInput }) => {
             className="border border-[#050505] cursor-pointer focus:outline-gray-600 w-full p-2 rounded-lg"
             required
             {...register("language", { required: true })}
-            defaultValue={userStackForm?.language}
           >
-            {watchTechStackChange &&
+            {selectedTechStack &&
               techStackApi
-                .find((stack) => stack?.name === watchTechStackChange)
+                .find((stack) => stack?.name === selectedTechStack)
                 ?.stack_options.map((language) => (
                   <option
                     className="cursor-pointer"
@@ -99,7 +100,10 @@ const UserStackForm = ({ onNext, onPrevious, formInput }) => {
         <div className="flex md:flex-row items-center flex-col gap-2">
           <button
             type="button"
-            onClick={handleNavigatePrevious}
+            onClick={(e) => {
+              e.preventDefault();
+              onPrevious();
+            }}
             className="bg-white text-black border border-gray-500 px-4 py-2 w-full rounded-lg hover:border-gray-900"
           >
             Go Back

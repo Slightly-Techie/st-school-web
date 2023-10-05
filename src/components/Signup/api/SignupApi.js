@@ -1,3 +1,5 @@
+const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL
+
 async function handleFetch(url, options = {
     method : 'GET',
     headers : {
@@ -15,14 +17,14 @@ async function handleFetch(url, options = {
 
 /* - api fetch call to fetch tech stack responses */
 export async function fetchTechStack(){
-    const url = 'https://a3e6-154-160-19-217.ngrok-free.app/stacks'
+    const url = `${apiUrl}/stacks`
     return handleFetch(url)
 }
 
 
 /* - api fetch route to make payments */
 export async function makePayments() {
-    const url = 'payments_url '
+    const url = `${apiUrl}/user`
     const options = {
         method: 'POST',
         headers: {
@@ -30,6 +32,7 @@ export async function makePayments() {
         },
         mode: 'cors'
     }
+
 
     return handleFetch(url, options)
 }
