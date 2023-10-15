@@ -1,80 +1,74 @@
-import React, { createContext, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { createContext, useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuthContext() {
-  return useContext(AuthContext);
+  return useContext(AuthContext)
 }
 
+// eslint-disable-next-line react/prop-types
 export default function AuthProvider({ children }) {
-  const [token, setToken] = useState(localStorage.getItem('token'));
-  const [userRole, setUserRole] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [userRole, setUserRole] = useState(false)
   const navigate = useNavigate()
   const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL
 
-
-
   const login = async (email, password) => {
     try {
-      const data = await handleSubmit(email, password);
+      const data = await handleSubmit(email, password)
       if (data.token) {
-        setToken(data.token);
-        setUserRole(data.role);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userRole', data.role);
+        setToken(data.token)
+        setUserRole(data.role)
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('userRole', data.role)
       } else {
-        throw new Error(data.message);
+        throw new Error(data.message)
       }
     } catch (error) {
-      throw error;
+      throw new Error(error.message)
     }
-  };
+  }
 
   const logout = () => {
-    setToken(null);
-    setUserRole(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('userRole');
+    setToken(null)
+    setUserRole(null)
+    localStorage.removeItem('token')
+    localStorage.removeItem('userRole')
     navigate('/')
-    
-  };
+  }
 
-  const isAuthenticated = !!token;
+  const isAuthenticated = !!token
 
   const state = {
     isAuthenticated,
     userRole,
     login,
-    logout,
-  };
+    logout
+  }
 
   const handleSubmit = async (email, password) => {
-    const url = `${apiUrl}/login`;
+    const url = `${apiUrl}/login`
     return fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         email,
-        password,
-      }),
+        password
+      })
+    }).then((response) => {
+      if (response.status === 200) {
+        return response.json()
+      } else {
+        return response.json().then((data) => {
+          throw new Error(data.message)
+        })
+      }
     })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          return response.json().then((data) => {
-            throw new Error(data.message);
-          });
-        }
-      });
-  };
+  }
 
-  return (
-    <AuthContext.Provider value={state}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>
 }
