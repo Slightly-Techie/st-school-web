@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link} from 'react-router-dom'
+import { useAuthContext } from '../context/AuthContext'
 
 const Sidebar = ({ Menus }) => {
   const [open, setOpen] = useState(window.innerWidth >= 768)
-
+  const {logout} = useAuthContext()
   useEffect(() => {
     const handleResize = () => {
       setOpen(window.innerWidth >= 768)
@@ -21,6 +22,8 @@ const Sidebar = ({ Menus }) => {
       setOpen(false)
     }
   }
+
+  
 
   return (
     <div className=" text-white">
@@ -60,7 +63,7 @@ const Sidebar = ({ Menus }) => {
           </div>
           <div className="flex rounded-md p-2 cursor-pointer text-gray-300 hover:bg-light-white items-center gap-x-4 float">
             <img src="/src/assets/User.png" />
-            <span className={`${!open && 'hidden'} origin-left duration-200`}>
+            <span className={`${!open && 'hidden'} origin-left duration-200`} onClick={logout}>
               Logout
             </span>
           </div>

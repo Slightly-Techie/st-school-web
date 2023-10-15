@@ -1,15 +1,14 @@
-import {React , useState} from 'react'
+import {React} from 'react'
 import Admin from '../components/Dashboards/Admin';
 import User from '../components/Dashboards/User';
+import { useAuthContext } from '../context/AuthContext';
 
 
 const Dashboard = () => {
-const [admin, setAdmin] = useState(false)
-
-
+  const {userRole} = useAuthContext()
   return (
     <div className="dashboard">
-        {admin ? <Admin/> : <User/>}
+        {userRole ? <Admin/> : <User/>}
     </div>
 
   

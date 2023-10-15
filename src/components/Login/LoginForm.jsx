@@ -1,35 +1,43 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
 import LoginHeading from './LoginHeading'
 import logo from '../../assets/logo.png'
+import { useAuthContext } from '../../context/AuthContext';
+
 function LoginForm() {
   const [type, setType] = useState('password')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isChecked, setIsChecked] = useState(false)
+  const {login} = useAuthContext()
+  const navigate = useNavigate()
 
-  const handleLogin = (e) => {
-    e.preventDefault()
 
-    if (email.valueOf() === '' || password.valueOf() === '') {
-      toast.error('Please fill all the fields')
+
+  
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    if (email.trim() === '' || password.trim() === '') {
+      toast.error('Please fill in all the fields');
     } else {
-      console.log({ email, password, isChecked })
-      toast.success('Login Successful')
+      try {
+        await login(email, password); // Use the login function from AuthContext
+        toast.success('Login Successful');
+        navigate('/dashboard');
+      } catch (error) {
+        toast.error(error.message);
+      }
+  
+      if (isChecked) {
+        toast.success('Always logged in');
+      }
     }
-
-    if (isChecked) {
-      setIsChecked(true)
-      toast.success('Always logged in')
-    } else {
-      setIsChecked(false)
-    }
-
-    setEmail('')
-    setPassword('')
-  }
+  };
+  
+  
   return (
     <div className="flex flex-col justify-center items-start p-3 md:px-[7rem] mx-auto md:ml-20 max-w-[100dvw] md:w-[80dvw] h-screen relative ">
       <img
