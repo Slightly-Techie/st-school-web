@@ -1,6 +1,6 @@
 const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL
 
-async function handleFetch(url, options = {
+export async function handleFetch(url, options = {
     method : 'GET',
     headers : {
         'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ export async function fetchTechStack(){
 
 /* - api fetch route to make payments */
 export async function makePayments() {
-    const url = `${apiUrl}/user`
+    const url = `${apiUrl}/users`
     const options = {
         method: 'POST',
         headers: {

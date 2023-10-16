@@ -1,80 +1,48 @@
-import React, { createContext, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { createContext, useContext, useState } from "react";
+import { verifyAndExtractUser, getToken, removeToken } from "../utils/helpers";
+import { toast } from "react-hot-toast";
 
 const AuthContext = createContext();
 
-export function useAuthContext() {
-  return useContext(AuthContext);
-}
+export const useAuthContext = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }) {
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userRole, setUserRole] = useState(false);
-  const navigate = useNavigate()
-  const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL
 
-
-
-  const login = async (email, password) => {
-    try {
-      const data = await handleSubmit(email, password);
-      if (data.token) {
-        setToken(data.token);
-        setUserRole(data.role);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userRole', data.role);
-      } else {
-        throw new Error(data.message);
+  React.useEffect(() => {
+    const token = getToken
+    if (token) {
+      try {
+        const getUser = verifyAndExtractUser(token);
+        setUser(getUser);
+        setIsAuthenticated(true);
+      } catch (err) {
+        setUser(null);
+        setIsAuthenticated(false);
+        removeToken();
+        toast.error("invalid or exprired token");
       }
-    } catch (error) {
-      throw error;
     }
-  };
+    
+  }, [isAuthenticated]);
+
 
   const logout = () => {
-    setToken(null);
-    setUserRole(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('userRole');
-    navigate('/')
-    
-  };
-
-  const isAuthenticated = !!token;
+    setIsAuthenticated(false)
+    setUser(null)
+    removeToken()
+  }
 
   const state = {
     isAuthenticated,
     userRole,
-    login,
-    logout,
+    user,
+    setUser,
+    setIsAuthenticated,
+    logout
   };
 
-  const handleSubmit = async (email, password) => {
-    const url = `${apiUrl}/login`;
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          return response.json().then((data) => {
-            throw new Error(data.message);
-          });
-        }
-      });
-  };
-
-  return (
-    <AuthContext.Provider value={state}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
 }
