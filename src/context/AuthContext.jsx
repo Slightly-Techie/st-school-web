@@ -2,10 +2,12 @@ import React, { createContext, useContext, useState } from "react";
 import { verifyAndExtractUser, getToken, removeToken } from "../utils/helpers";
 import { toast } from "react-hot-toast";
 
-const AuthContext = createContext();
+
+const AuthContext = createContext()
 
 export const useAuthContext = () => useContext(AuthContext);
 
+// eslint-disable-next-line react/prop-types
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
