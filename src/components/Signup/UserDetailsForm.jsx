@@ -19,10 +19,6 @@ const UserDetailsForm = ({ onNext, formInput }) => {
   
 
   const onSubmit = (data) => {
-
-    // remove the confirmPassword before submiting
-    delete data.confirmPassword
-
     const userDetailForm = {...userForm, ...data}
     setUserForm({...userDetailForm})
     onNext();
@@ -45,8 +41,8 @@ const UserDetailsForm = ({ onNext, formInput }) => {
               placeholder="John"
               className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
               required
-              {...register("firstname", { required: true })}
-              defaultValue={userForm?.firstname || ''}
+              {...register("first_name", { required: true })}
+              defaultValue={userForm['first_name'] || ''}
             />
           </div>
           <div className="lastname">
@@ -62,8 +58,8 @@ const UserDetailsForm = ({ onNext, formInput }) => {
               placeholder="Doe"
               className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
               required
-              {...register("lastname", { required: true })}
-              defaultValue={userForm?.lastname || ''}
+              {...register("last_name", { required: true })}
+              defaultValue={userForm["last_name"] || ''}
             />
           </div>
         </div>
@@ -113,9 +109,9 @@ const UserDetailsForm = ({ onNext, formInput }) => {
                 message: "Password must have at least 8 characters",
               },
               pattern: {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
                 message:
-                  "Password must contain at least one uppercase letter, one lowercase letter, and one number.",
+                  "Password must contain at least one uppercase letter, one lowercase letter, and one number and one symbol atleast.",
               },
             })}
             defaultValue={userForm?.password || ''}
@@ -139,7 +135,7 @@ const UserDetailsForm = ({ onNext, formInput }) => {
         </div>
         <div className="mb-4">
           <label
-            htmlFor="confirmPassword"
+            htmlFor="password_confirmation"
             className="block text-gray-800 font-medium mb-2"
           >
             Confirm Password
@@ -147,20 +143,20 @@ const UserDetailsForm = ({ onNext, formInput }) => {
           <input
             type={type}
             placeholder="•••••••••••••"
-            name="confirmPassword"
+            name="password_confirmation"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
             required
-            {...register("confirmPassword", {
+            {...register("password_confirmation", {
               required: true,
               validate: (val) => {
                 const { password } = getValues();
                 return password === val || "Passwords do not match!";
               },
             })}
-            defaultValue={userForm?.confirmPassword || ''}
+            defaultValue={userForm[''] || ''}
           />
-          {errors.confirmPassword && (
-            <p className="text-red-600">{errors.confirmPassword.message}</p>
+          {errors['password_confirmation'] && (
+            <p className="text-red-600">{errors['password_confirmation'].message}</p>
           )}
         </div>
         <div>

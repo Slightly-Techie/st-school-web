@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LayoutWrapper from "./components/LayoutWrapper";
 import { useForm } from "react-hook-form";
-import { makePayments } from "./api/SignupApi";
+import { createUser } from "./api/SignupApi";
+import { toast } from "react-hot-toast";
 
 const UserPaymentForm = ({ onPrevious, formInput }) => {
   const [userForm, setUserForm] = formInput;
+  const navigate = useNavigate();
 
   const {
     register,
@@ -13,24 +15,23 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
     formState: { errors },
   } = useForm();
 
-
   const onSubmit = (data) => {
+    const formDataSubmit = { ...userForm, ...data };
+    setUserForm({ ...formDataSubmit });
 
-
-    const formDataSubmit = {...userForm, ...data}
-    setUserForm({...formDataSubmit})
-
-
-    console.log("user payment data ", formDataSubmit);
-
-    makePayments(formDataSubmit).then(responseData =>  {
-      console.log("made it here...")
-
-    })
-    .catch(err => console.warn(err))
-
+    createUser(formDataSubmit)
+      .then((responseData) => {
+        /*
+           response data contains info abt the user... - email, password, paymentstatus etc
+        */
+        const { email } = responseData;
+        toast.success("user created successfully");
+        navigate("/", { state: { email } });
+      })
+      .catch((err) => {
+        toast.error(String(err));
+      });
   };
-
 
   return (
     <LayoutWrapper>
@@ -46,17 +47,21 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
             placeholder="make partial/full payment"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg text-[#706E6E] "
             required
-            {...register("paymentType", { required: true })}
-            defaultValue={userForm?.paymentType || 'Full'}
+            {...register("payment_type", { required: true })}
+            defaultValue={userForm["payment_type"] || "Full"}
           >
             <option value="" disabled>
               Select Payment Type
             </option>
-            <option name="partial" value="Part">Partial Payment &#40;GHC 100/m&#41;</option>
-            <option name="full" value="Full">Full Payment &#40;GHC 300/m&#41;</option>
+            <option name="partial" value="Part">
+              Partial Payment &#40;GHC 100/m&#41;
+            </option>
+            <option name="full" value="Full">
+              Full Payment &#40;GHC 300/m&#41;
+            </option>
           </select>
         </div>
-      
+
         <div className="mb-7">
           <label htmlFor="password" className="block text-[#706E6E]">
             Enter your Mobile Money Number
@@ -66,26 +71,26 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
             name="phone"
             placeholder="024-736-9812"
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg "
-            {...register("phoneNumber", {
+            {...register("phone_number", {
               required: "Enter a valid phone number",
-              maxLength: {value: 10, message:"Should be a 10 digit number"},
+              maxLength: { value: 10, message: "Should be a 10 digit number" },
               pattern: {
                 value: /^0\d{9}$/,
                 message: "Enter a valid phone number",
               },
             })}
-            defaultValue={userForm?.phoneNumber || null}
+            defaultValue={userForm["phone_number"] || null}
           />
           {errors.phoneNumber && (
-            <p className="text-red-600">{errors.phoneNumber.message}</p>
+            <p className="text-red-600">{errors["phone_number"].message}</p>
           )}
         </div>
         <div className="flex md:flex-row items-center  flex-col gap-2">
           <button
             type="submit"
             onClick={(e) => {
-              e.preventDefault()
-              onPrevious()
+              e.preventDefault();
+              onPrevious();
             }}
             className="bg-white text-black border border-gray-500 px-4 py-2 w-full rounded-lg hover:border-gray-900"
           >

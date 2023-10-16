@@ -1,38 +1,39 @@
-const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL
+const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL;
 
 export async function handleFetch(url, options = {
-    method : 'GET',
+    method : "GET",
     headers : {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
     },
-    mode: 'cors'
+    mode : "cors"
 }) {
     const response = await fetch(url, options);
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
+    if (! response.ok) {
+        throw new Error(`err ${
+            response ?. statusText
+        } `);
     }
+
     return response.json();
 }
 
-
 /* - api fetch call to fetch tech stack responses */
-export async function fetchTechStack(){
-    const url = `${apiUrl}/stacks`
-    return handleFetch(url)
+export async function fetchTechStack() {
+    const url = `${apiUrl}/stacks`;
+    return handleFetch(url);
 }
 
-
 /* - api fetch route to make payments */
-export async function makePayments() {
-    const url = `${apiUrl}/users`
+export async function createUser(user) {
+    const url = `${apiUrl}/users`;
     const options = {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
-        mode: 'cors'
-    }
+        mode: "cors",
+        body: JSON.stringify(user)
+    };
 
-
-    return handleFetch(url, options)
+    return handleFetch(url, options);
 }
