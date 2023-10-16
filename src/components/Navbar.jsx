@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import bell from '../assets/bell-icon.svg';
@@ -58,7 +58,7 @@ const Navbar = () => {
                 loading="lazy"
                 alt="User Avatar"
               />
-              <h4>Abdul Rashid</h4>
+              <h4>rashid</h4>
             </div>
           </div>
         )}
@@ -82,7 +82,7 @@ const Navbar = () => {
               className="rounded-full h-6 w-6 cursor-pointer"
               alt="User Avatar"
             />
-            <h4 className='whitespace-nowrap cursor-pointer'>Abdul Rashid</h4>
+            <h4 className='whitespace-nowrap cursor-pointer'>rashid</h4>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ const Admin = () => {
     { title: 'Admin', src: 'User', gap: true, path: '/' },
     { title: 'Dashboard', src: 'Chat', path: '/' },
     { title: 'Lessons', src: 'Chart', path: '/Lessons' },
-    { title: 'Users', src: 'Chat', path: '/' },
+    { title: 'Users', src: 'Chat', path: '/users' },
     { title: 'Create Assignment', src: 'Chart', path: '/Lessons' },
     { title: 'Assignment', src: 'Calendar', path: '/' }
   ]
