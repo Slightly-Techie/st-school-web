@@ -3,13 +3,9 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import bell from '../assets/bell-icon.svg';
 import person from '../assets/person-icon.svg';
-import { useUserContext } from '../context/UserContext';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // const {user, loading, error} = useUserContext()
-
-
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);

@@ -11,21 +11,19 @@ import AssignmentDetails from './pages/AssignmentDetails'
 import Certificate from './pages/Certificate'
 import PaymentSuccess from './components/Signup/PaymentSuccess'
 import ViewCertificate from './pages/ViewCertificate'
-import {useAuthContext} from './context/AuthContext'
-import { Navigate } from 'react-router-dom'
 import DataTable from './components/Dashboards/DataTable'
+import ProtectedRoute from '../protectedRoute/ProtectedRoute'
+import { useAuthContext } from './context/AuthContext'
 
 function App() {
-  const { isAuthenticated, userRole } = useAuthContext();
-
-
+  const { userRole } = useAuthContext()
   return (
     <>
       <Routes>
         <Route path="/" exact element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signup/redirect" element={<PaymentSuccess />} />
-        <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}>
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
           <Route path="" element={<Home />} />
           <Route path="Lessons" element={<Lessons />} />
           <Route path="Lessons/:course_title" element={<LessonDetails />} />
