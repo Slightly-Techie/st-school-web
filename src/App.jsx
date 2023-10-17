@@ -12,7 +12,7 @@ import Certificate from './pages/Certificate'
 import PaymentSuccess from './components/Signup/PaymentSuccess'
 import ViewCertificate from './pages/ViewCertificate'
 import DataTable from './components/Dashboards/DataTable'
-import ProtectedRoute from '../protectedRoute/ProtectedRoute'
+import ProtectedRoute from './protectedRoute/ProtectedRoute'
 import { useAuthContext } from './context/AuthContext'
 
 function App() {
