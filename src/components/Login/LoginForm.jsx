@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { toast } from "react-hot-toast";
 import LoginHeading from "./LoginHeading";
@@ -17,31 +17,36 @@ function LoginForm() {
   const { isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
 
+  const { state } = useLocation()
+
+  
+  const { register, handleSubmit, setValue } = useForm();
+
   useEffect(() => {
     if (isAuthenticated) navigate("/dashboard");
+    if(state?.email) setValue("email", state?.email)
   }, [isAuthenticated]);
 
-  const { register, handleSubmit } = useForm();
-
+  
   const onSubmit = (data) => {
     const { email, password } = data;
     setLoading(true);
-
+    
     handleLogin(email, password)
-      .then((data) => {
-        const { token } = data;
-        const user = verifyAndExtractUser(token);
-
-        if (user) {
-          setUser(user);
-          setIsAuthenticated(true);
-          setToken(token);
-          setLoading(false);
+    .then((data) => {
+      const { token } = data;
+      const user = verifyAndExtractUser(token);
+      
+      if (user) {
+        setUser(user);
+        setIsAuthenticated(true);
+        setToken(token);
+        setLoading(false);
           navigate("/dashboard");
         }
       })
       .catch((err) => {
-        toast.error(err);
+        toast.error(String(err));
         setLoading(false);
       });
   };

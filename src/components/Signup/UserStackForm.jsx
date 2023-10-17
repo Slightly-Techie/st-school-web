@@ -3,7 +3,7 @@ import LayoutWrapper from "./components/LayoutWrapper";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { fetchTechStack } from "./api/SignupApi";
-import { toast } from 'react-hot-toast'
+import { toast } from "react-hot-toast";
 
 const UserStackForm = ({ onNext, onPrevious, formInput }) => {
   const [techStackApi, setTechStackApi] = useState([]);
@@ -26,16 +26,15 @@ const UserStackForm = ({ onNext, onPrevious, formInput }) => {
 
         if (userForm?.stack) {
           setSelectedTechStack(userForm.stack);
-          setValue("stack", userForm.stack);
+          // setValue("stack", userForm.stack);
         }
       })
-      .catch((err) => toast.error(err));
+      .catch((err) => toast.error(String(err)));
   }, []);
-
 
   const handleTechStackChange = (selectedStack) => {
     setSelectedTechStack(selectedStack);
-    setValue("stack", selectedStack);
+    // setValue("stack", selectedStack);
   };
 
   return (
@@ -81,7 +80,7 @@ const UserStackForm = ({ onNext, onPrevious, formInput }) => {
             name="language"
             className="border border-[#050505] cursor-pointer focus:outline-gray-600 w-full p-2 rounded-lg"
             required
-            {...register("language", { required: true })}
+            {...register("stack_option", { required: true })}
           >
             {selectedTechStack &&
               techStackApi
@@ -90,7 +89,7 @@ const UserStackForm = ({ onNext, onPrevious, formInput }) => {
                   <option
                     className="cursor-pointer"
                     key={language?.name}
-                    value={language?.name.toLowerCase()}
+                    value={language?.name}
                   >
                     {language?.name}
                   </option>
