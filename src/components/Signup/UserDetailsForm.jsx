@@ -170,7 +170,7 @@ const UserDetailsForm = ({ onNext, formInput }) => {
         <div className="pb-3">
           <p>
             <span>Already have an account?</span>
-            <Link to={"/"} className="font-semibold ml-2">
+            <Link to={"/login"} className="font-semibold ml-2">
               Sign in
             </Link>
           </p>
