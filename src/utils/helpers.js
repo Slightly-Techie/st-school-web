@@ -27,15 +27,35 @@ const fetchUser = async(token) => {
 }
 
 
-const verifyAndExtractUser = (token) => {
+const verifyAndExtractUser = async(token) => {
     /*
     use jwt frontend to get user from token
     */
-    return { name: "dickson", role: "student" }
+    // return { name: "dickson", role: "student" }
 
     // const tokenUser = await fetchUser(token);
     // if (tokenUser) return tokenUser;
     // else return null;
+
+    try {
+
+        const response = await fetch(`${apiUrl}/users`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+              },
+        })
+
+        if(!response.ok) throw new Error(response.statusText)
+        const userData = await response.json()
+
+        return userData
+
+    }
+    catch(err) {
+        console.error('Error fetching user data ', err)
+        return null
+    }
 
 
   };
