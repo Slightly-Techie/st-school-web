@@ -4,11 +4,11 @@ WORKDIR /frontend
 
 COPY ./package.json /frontend
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
 # Handle Nginx
 FROM nginx
