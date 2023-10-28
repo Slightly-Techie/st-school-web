@@ -1,38 +1,110 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LayoutWrapper from "./components/LayoutWrapper";
 import { useForm } from "react-hook-form";
 import { createUser } from "./api/SignupApi";
 import { toast } from "react-hot-toast";
+import { PaystackButton } from 'react-paystack'
 
 const UserPaymentForm = ({ onPrevious, formInput }) => {
   const [userForm, setUserForm] = formInput;
+  const [isPaid, setIsPaid] = useState(false)
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
 
+
+  const componentProps = {
+    email: userForm.email,
+    amount: getValues('payment_type') === 'Full' ? 300 * 100 : 700 * 100,
+    currency: 'GHS',
+    metadata: {
+      name: `${userForm['first_name']} ${userForm['last_name']}`,
+      phone: getValues('phone_number'),
+    },
+    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
+    text: "Proceed",
+    onSuccess: (response) => {
+
+    //   {
+    //     "reference": "T679202112520310",
+    //     "trans": "3230325782",
+    //     "status": "success",
+    //     "message": "Approved",
+    //     "transaction": "3230325782",
+    //     "trxref": "T679202112520310",
+    //     "redirecturl": "?trxref=T679202112520310&reference=T679202112520310"
+    // }
+
+    const options = {
+      mode: 'cors',
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_PAYSTACK_PRIVATE_KEY}`
+      }
+    }
+
+    fetch(`https://api.paystack.co/transaction/verify/${response.reference}`, options)
+    .then(response => response.json())
+    .then(data => {
+      // console.log("verify payment data ", data)
+
+      if(data.status) {
+
+        const phoneNumber = getValues('phone_number')
+        const paymentType = getValues('payment_type')
+        const userInfo = {...userForm, ['phone_number']: phoneNumber, ['payment_type']: paymentType, ['reference']: response.reference}
+
+        // console.log("userInfo ", userInfo)
+
+        createUser(userInfo)
+        .then((responseData) => {
+      
+          const { email } = responseData;
+          toast.success("user created successfully");
+          navigate("/login", { state: { email } });
+        })
+        .catch((err) => {
+          toast.error(String(err));
+          toast.error("email already in use or network error")
+        });
+      }
+    })
+    .catch(err => console.warn("error on line 55 ", err))
+  
+      // console.log("paystack response ", response)
+    },
+
+    onClose: () => alert("Wait! You need this oil, don't go!!!!"),
+  }
+
+
   const onSubmit = (data) => {
+    // phone number, payment
     const formDataSubmit = { ...userForm, ...data };
     setUserForm({ ...formDataSubmit });
 
-    createUser(formDataSubmit)
-      .then((responseData) => {
-        /*
-           response data contains info abt the user... - email, password, paymentstatus etc
-        */
-        const { email } = responseData;
-        toast.success("user created successfully");
-        navigate("/", { state: { email } });
-      })
-      .catch((err) => {
-        toast.error(String(err));
-      });
-  };
+    // console.log("user form ", formDataSubmit)
 
+    // createUser(formDataSubmit)
+    //   .then((responseData) => {
+    //     /*
+    //        response data contains info abt the user... - email, password, paymentstatus etc
+    //     */
+    //     const { email } = responseData;
+    //     toast.success("user created successfully");
+    //     navigate("/login", { state: { email } });
+    //   })
+    //   .catch((err) => {
+    //     toast.error(String(err));
+    //     toast.error("email already in use or network error")
+    //   });
+  };
+ 
   return (
     <LayoutWrapper>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -96,12 +168,13 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
           >
             Go Back
           </button>
-          <button
+          <PaystackButton {...componentProps} className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg md:mb-0 border border-gray-900 hover:bg-gray-800 mb-4" />
+          {/* <button
             type="submit"
             className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg md:mb-0 border border-gray-900 hover:bg-gray-800 mb-4"
           >
             Proceed
-          </button>
+          </button> */}
         </div>
         <div className="pb-3 md:mt-4">
           <p>

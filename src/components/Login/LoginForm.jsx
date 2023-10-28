@@ -33,10 +33,13 @@ function LoginForm() {
     setLoading(true);
     
     handleLogin(email, password)
-    .then((data) => {
-      const { token } = data;
-      const user = verifyAndExtractUser(token);
+    .then(async(data) => {
       
+      // console.log("login token data ", data)
+      const { token } = data;
+      const user = await verifyAndExtractUser(token);
+      
+      console.log("user is ", user)
       if (user) {
         setUser(user);
         setIsAuthenticated(true);

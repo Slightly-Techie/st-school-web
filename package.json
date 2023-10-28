@@ -21,6 +21,7 @@
     "react-hook-form": "^7.46.2",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
+    "react-paystack": "^4.0.3",
     "react-router-dom": "^6.16.0"
   },
   "devDependencies": {

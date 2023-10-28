@@ -14,13 +14,15 @@ import ViewCertificate from './pages/ViewCertificate'
 import DataTable from './components/Dashboards/DataTable'
 import ProtectedRoute from './protectedRoute/ProtectedRoute'
 import { useAuthContext } from './context/AuthContext'
+import Homepage from './pages/Homepage'
 
 function App() {
   const { userRole } = useAuthContext()
   return (
     <>
       <Routes>
-        <Route path="/" exact element={<Login />} />
+        <Route path="/" exact element={<Homepage />} />
+        <Route path="/login"  element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signup/redirect" element={<PaymentSuccess />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
