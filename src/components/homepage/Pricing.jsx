@@ -4,26 +4,30 @@ import PricingCard from "./PricingCard";
 function Pricing() {
   const pricingData = [
     {
-      title: "Pro Plan",
-      price: "39.99",
-      features: ["Feature 1", "Feature 2", "Feature 3", "Feature 4"],
-      buttonLabel: "Select Plan",
+      title: "One-Month Plan",
+      price: "300",
+      features: [
+        "Interactive Lessons",
+        "24/7 Support",
+        "Active Community",
+        "Valid for 1 Month",
+      ],
+      buttonLabel: "Sign Up",
     },
     {
-      title: "Premium Plan",
-      price: "59.99",
+      title: "Three-Month Plan",
+      price: "700",
       features: [
-        "Feature 1",
-        "Feature 2",
-        "Feature 3",
-        "Feature 4",
-        "Feature 5",
+        "Interactive Lessons",
+        "24/7 Support",
+        "Active Community",
+        "Valid for 3 Months",
       ],
-      buttonLabel: "Select Plan",
+      buttonLabel: "Sign Up",
     },
   ];
   return (
-    <section className="w-full">
+    <section className="w-full py-16" id="pricing">
       <section className="max-w-screen-xl mx-auto h-full p-5 xl:px-0">
         <h1 className="text-2xl lg:text-3xl font-bold leading-8">Pricing</h1>
         <br />

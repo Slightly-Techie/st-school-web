@@ -2,9 +2,9 @@ import About from "../components/homepage/About"
 import Features from "../components/homepage/Features"
 import Footer from "../components/homepage/Footer"
 import Hero from "../components/homepage/Hero"
-import Mentors from "../components/homepage/Mentors"
 import Navbar from "../components/homepage/Navbar"
 import Pricing from "../components/homepage/Pricing"
+import Reviews from "../components/homepage/Reviews"
 
 function Homepage() {
   return (
@@ -12,9 +12,9 @@ function Homepage() {
       <Navbar/>
       <Hero/>
       <About/>
-      <Mentors/>
       <Features/>
       <Pricing/>
+      <Reviews/>
       <Footer/>
     </section>
   )

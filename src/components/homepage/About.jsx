@@ -1,6 +1,6 @@
 function About() {
   return (
-    <section className="w-full bg-[#f5f9f9] py-8">
+    <section className="w-full py-8" id="about">
       <section className="max-w-screen-xl mx-auto h-full p-5 xl:px-0">
         <section className="w-full flex flex-col md:flex-row items-center gap-8">
           <img
@@ -10,12 +10,16 @@ function About() {
           />
           <section className="w-full lg:w-1/2 rounded-3xl">
             <h1 className="text-3xl lg:text-4xl font-bold leading-8">
-              Reimagining the African Dream
+              Cultivating Practical Experience at Slightly Techie School
             </h1>
             <p className="my-3">
-              This is where dreams come to life. With our carefully crafted
-              learning courses and diploma programs we will meet you where you
-              are, and take you to where you want to be in your career.
+              At Slightly Techie School, our commitment to fostering excellence
+              stems from our deep appreciation of the value of practical
+              experience. Within our programs, we have meticulously woven
+              hands-on projects, designed with the primary objective of honing
+              your creativity and fortifying your problem-solving prowess,
+              ensuring that you are equipped with the skills and knowledge
+              needed to excel in your chosen field.
             </p>
           </section>
         </section>

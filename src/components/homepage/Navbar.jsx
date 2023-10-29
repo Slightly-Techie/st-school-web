@@ -5,23 +5,18 @@ import { Link } from "react-router-dom";
 const pageLinks = [
   {
     id: 0,
-    name: "Features",
-    href: "features",
+    name: "About",
+    href: "about",
   },
   {
     id: 1,
-    name: "Reviews",
-    href: "reviews",
-  },
-  {
-    id: 2,
     name: "Pricing",
     href: "pricing",
   },
   {
-    id: 3,
-    name: "FAQs",
-    href: "faqs",
+    id: 2,
+    name: "Reviews",
+    href: "reviews",
   },
 ];
 
@@ -32,7 +27,9 @@ function Navbar() {
       <nav className="w-full h-[7vh] fixed left-0 top-0 z-50 border-b border-b-[#161616] bg-black text-white">
         <section className="flex w-full h-full justify-between items-center p-5">
           {/* Left */}
-          <section>s-school</section>
+          <section>
+            <img src="https://slightlytechie.com/_next/image?url=%2Flogo.png&w=32&q=75" alt="st-logo" />
+          </section>
           {/* Right */}
           <section className="hidden lg:flex gap-5 items-center">
             <section className="flex items-center gap-5">
@@ -68,7 +65,7 @@ function Navbar() {
             : "lg:hidden fixed z-[40] h-fit pt-[7vh] bg-white border-b w-full top-[-50vh] left-0 ease duration-500"
         }
       >
-        <section className="flex flex-col justify-center gap-5 w-full h-full p-5">
+        <section className="flex flex-col justify-center bg-white gap-5 w-full h-full p-5">
           {pageLinks.map((item) => {
             return (
               <a

@@ -1,3 +1,6 @@
+*{
+  scroll-behavior: smooth;
+}
 .navbar {
   width: 100%;
 }
@@ -13,6 +16,7 @@
 }
 body {
   font-family: "Satoshi", sans-serif;
+  
 }
 
 .hero-section {
@@ -30,4 +34,25 @@ body {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+/* Slider CSS */
+.row-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  position: relative;
+  padding: 1rem 0.6rem;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.row-container::-webkit-scrollbar {
+  display: none;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
