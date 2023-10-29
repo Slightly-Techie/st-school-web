@@ -8,7 +8,7 @@ function Features() {
       <section className="max-w-screen-xl mx-auto h-full p-5 xl:px-0">
         <section className="grid lg:grid-cols-3 gap-5">
           {/* 1 */}
-          <section className="col-span-1 bg-white rounded p-5 h-[200px] lg:h-[300px] flex flex-col justify-center items-center">
+          <section className="col-span-1 bg-white rounded-xl p-5 h-[200px] lg:h-[300px] flex flex-col justify-center items-center">
             <section className="flex justify-center items-center">
               <BiCodeAlt size={30} />
             </section>
@@ -20,7 +20,7 @@ function Features() {
             </section>
           </section>
           {/* 2 */}
-          <section className="col-span-1 bg-white rounded p-5 h-[200px] lg:h-[300px] flex flex-col justify-center items-center">
+          <section className="col-span-1 bg-white rounded-xl p-5 h-[200px] lg:h-[300px] flex flex-col justify-center items-center">
             <section className="flex justify-center items-center">
               <GrCertificate size={30} />
             </section>
@@ -33,7 +33,7 @@ function Features() {
             </section>
           </section>
           {/* 3 */}
-          <section className="col-span-1 bg-white rounded p-5 h-[200px] lg:h-[300px] flex flex-col justify-center items-center">
+          <section className="col-span-1 bg-white rounded-xl p-5 h-[200px] lg:h-[300px] flex flex-col justify-center items-center">
             <section className="flex justify-center items-center">
               <FaGlobeAfrica size={30} />
             </section>

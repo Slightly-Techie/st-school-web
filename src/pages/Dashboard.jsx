@@ -1,4 +1,3 @@
-import {React} from 'react'
 import Admin from '../components/Dashboards/Admin';
 import User from '../components/Dashboards/User';
 import { useAuthContext } from '../context/AuthContext';
