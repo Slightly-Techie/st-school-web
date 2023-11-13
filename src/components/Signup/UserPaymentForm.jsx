@@ -51,7 +51,6 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
     fetch(`https://api.paystack.co/transaction/verify/${response.reference}`, options)
     .then(response => response.json())
     .then(data => {
-      // console.log("verify payment data ", data)
 
       if(data.status) {
 
@@ -59,7 +58,6 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
         const paymentType = getValues('payment_type')
         const userInfo = {...userForm, ['phone_number']: phoneNumber, ['payment_type']: paymentType, ['reference']: response.reference}
 
-        // console.log("userInfo ", userInfo)
 
         createUser(userInfo)
         .then((responseData) => {
@@ -76,7 +74,6 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
     })
     .catch(err => console.warn("error on line 55 ", err))
   
-      // console.log("paystack response ", response)
     },
 
     onClose: () => alert("Wait! You need this oil, don't go!!!!"),
@@ -88,21 +85,6 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
     const formDataSubmit = { ...userForm, ...data };
     setUserForm({ ...formDataSubmit });
 
-    // console.log("user form ", formDataSubmit)
-
-    // createUser(formDataSubmit)
-    //   .then((responseData) => {
-    //     /*
-    //        response data contains info abt the user... - email, password, paymentstatus etc
-    //     */
-    //     const { email } = responseData;
-    //     toast.success("user created successfully");
-    //     navigate("/login", { state: { email } });
-    //   })
-    //   .catch((err) => {
-    //     toast.error(String(err));
-    //     toast.error("email already in use or network error")
-    //   });
   };
  
   return (
@@ -126,10 +108,10 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
               Select Payment Type
             </option>
             <option name="partial" value="Part">
-              Partial Payment &#40;GHC 100/m&#41;
+              Partial Payment &#40;GHC 300/m&#41;
             </option>
             <option name="full" value="Full">
-              Full Payment &#40;GHC 300/m&#41;
+              Full Payment &#40;GHC 800&#41;
             </option>
           </select>
         </div>
@@ -169,12 +151,6 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
             Go Back
           </button>
           <PaystackButton {...componentProps} className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg md:mb-0 border border-gray-900 hover:bg-gray-800 mb-4" />
-          {/* <button
-            type="submit"
-            className="bg-gray-900 text-white px-4 py-2 w-full rounded-lg md:mb-0 border border-gray-900 hover:bg-gray-800 mb-4"
-          >
-            Proceed
-          </button> */}
         </div>
         <div className="pb-3 md:mt-4">
           <p>
