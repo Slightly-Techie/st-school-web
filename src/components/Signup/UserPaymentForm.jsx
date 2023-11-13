@@ -21,7 +21,7 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
 
   const componentProps = {
     email: userForm.email,
-    amount: getValues('payment_type') === 'Full' ? 300 * 100 : 700 * 100,
+    amount: getValues('payment_type') === 'Full' ? 300 * 100 : 800 * 100,
     currency: 'GHS',
     metadata: {
       name: `${userForm['first_name']} ${userForm['last_name']}`,
