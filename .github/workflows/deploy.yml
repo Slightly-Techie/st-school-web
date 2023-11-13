@@ -1,0 +1,26 @@
+name: SSH Deploy
+
+on:
+  push:
+    branches:
+      - main # Replace with your desired branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: deploy web app
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SCHOOL_SSH_HOST }}
+          username: ${{ secrets.SCHOOL_SSH_USERNAME }}
+          key: ${{ secrets.SCHOOL_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SCHOOL_SSH_PORT }}
+          script: |
+            whoami
+            pwd
+            cd /home/kwesi/apps/st-school-web
+            git pull origin main
+
+            docker-compose up --build -d
