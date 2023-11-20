@@ -3,23 +3,23 @@ import { Link } from "react-router-dom";
 const records = [
   {
     id: 0,
-    value: "10K+",
-    title: "Success Stories",
+    value: "2",
+    title: "Completed Cohorts",
   },
   {
     id: 1,
-    value: "10K+",
-    title: "Success Stories",
+    value: "30",
+    title: "Students",
   },
   {
     id: 2,
-    value: "10K+",
-    title: "Success Stories",
+    value: "10+",
+    title: "Tutors",
   },
   {
     id: 3,
-    value: "10K+",
-    title: "Success Stories",
+    value: "50+",
+    title: "Study Hours",
   },
 ];
 
