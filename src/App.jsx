@@ -15,6 +15,7 @@ import DataTable from './components/Dashboards/DataTable'
 import ProtectedRoute from './protectedRoute/ProtectedRoute'
 import { useAuthContext } from './context/AuthContext'
 import Homepage from './pages/Homepage'
+import PublicRoute from './protectedRoute/PublicRoute'
 
 function App() {
   const { userRole } = useAuthContext()
@@ -22,9 +23,9 @@ function App() {
     <>
       <Routes>
         <Route path="/" exact element={<Homepage />} />
-        <Route path="/login"  element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signup/redirect" element={<PaymentSuccess />} />
+        <Route path="/login"  element={<PublicRoute><Login /></PublicRoute>} />
+        <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
+        <Route path="/signup/redirect" element={<PublicRoute><PaymentSuccess /></PublicRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
           <Route path="" element={<Home />} />
           <Route path="Lessons" element={<Lessons />} />

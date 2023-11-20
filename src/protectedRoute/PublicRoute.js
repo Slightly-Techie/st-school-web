@@ -2,14 +2,14 @@ import { useEffect }  from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../context/AuthContext'
 
-function ProtectedRoute({ children }) {
+function PublicRoute({ children }) {
     const {isAuthenticated } = useAuthContext()
 
     
     const navigate = useNavigate()
 
     useEffect(() => {
-      if(!isAuthenticated) return navigate('/login')
+      if(isAuthenticated) return navigate('/dashboard')
     }, [isAuthenticated])
 
 
@@ -17,4 +17,4 @@ function ProtectedRoute({ children }) {
   
 }
 
-export default ProtectedRoute
+export default PublicRoute
