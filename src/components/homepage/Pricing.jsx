@@ -16,7 +16,7 @@ function Pricing() {
     },
     {
       title: "Three-Month Plan",
-      price: "700",
+      price: "800",
       features: [
         "Interactive Lessons",
         "24/7 Support",
