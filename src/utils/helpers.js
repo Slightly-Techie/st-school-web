@@ -62,7 +62,7 @@ const verifyAndExtractUser = async(token) => {
 
 
 const getFullName = (firstName, lastName) => {
-    return `${firstName} ${lastName}`.toLowerCase() || 'Anonymous'
+    return `${firstName} ${lastName}`.toUpperCase() || 'Anonymous'
 }
 
 export { setToken, setRole, getToken, getRole, removeToken, verifyAndExtractUser,getFullName}
