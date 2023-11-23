@@ -24,6 +24,10 @@ const Sidebar = ({ Menus }) => {
     }
   }
 
+  const handleLogout = () => {
+    logout()
+  }
+
   
 
   return (
@@ -73,7 +77,7 @@ const Sidebar = ({ Menus }) => {
           <div 
           className="flex rounded-md p-2 cursor-pointer text-gray-300 hover:bg-light-white items-center gap-x-4 float">
             <img src="/src/assets/User.png" />
-            <span className={`${!open && 'hidden'} origin-left duration-200`} onClick={logout}>
+            <span className={`${!open && 'hidden'} origin-left duration-200`} onClick={handleLogout}>
               Logout
             </span>
           </div>
