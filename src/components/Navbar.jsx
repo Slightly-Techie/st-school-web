@@ -3,16 +3,21 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import bell from '../assets/bell-icon.svg';
 import person from '../assets/person-icon.svg';
+import { useAuthContext } from '../context/AuthContext';
+import { getFullName } from '../utils/helpers';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user } = useAuthContext()
+
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
   
   return (
-    <nav className="fixed inset-x-0 top-0 h-16 flex w-full flex-wrap items-center z-50 bg-white relative flex w-full flex-wrap items-center justify-between py-2 text-black shadow-lg hover:text-neutral-700 lg:py-4">
+    <nav className="fixed inset-x-0 top-0 h-16 flex w-full flex-wrap items-center z-50 bg-white justify-between py-2 text-black shadow-lg hover:text-neutral-700 lg:py-4">
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <Link className="ml-6 " to="/">
           <img src={logo} alt="" />
@@ -58,7 +63,7 @@ const Navbar = () => {
                 loading="lazy"
                 alt="User Avatar"
               />
-              <h4>rashid</h4>
+              <h4>{getFullName(user?.first_name, user?.last_name)}</h4>
             </div>
           </div>
         )}
@@ -82,7 +87,7 @@ const Navbar = () => {
               className="rounded-full h-6 w-6 cursor-pointer"
               alt="User Avatar"
             />
-            <h4 className='whitespace-nowrap cursor-pointer'>rashid</h4>
+            <h4 className='whitespace-nowrap cursor-pointer'>{user?.first_name || 'anonymous'}</h4>
           </div>
         </div>
       </div>

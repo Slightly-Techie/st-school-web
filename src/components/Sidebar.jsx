@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Link} from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import { useAuthContext } from '../context/AuthContext'
 
 const Sidebar = ({ Menus }) => {
   const [open, setOpen] = useState(window.innerWidth >= 768)
+  const navigate = useNavigate()
   const {logout} = useAuthContext()
   useEffect(() => {
     const handleResize = () => {
@@ -55,6 +56,14 @@ const Sidebar = ({ Menus }) => {
           ))}
         </ul>
         <div className="mb-8  ">
+        <div 
+        onClick={() => navigate('/dashboard/profile/certificate')}
+        className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 items-center gap-x-4 float">
+            <img src="/src/assets/User.png" />
+            <span className={`${!open && 'hidden'} origin-left duration-200`}>
+              certificate
+            </span>
+          </div>
           <div className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 items-center gap-x-4 float">
             <img src="/src/assets/Setting.png" />
             <span className={`${!open && 'hidden'} origin-left duration-200`}>

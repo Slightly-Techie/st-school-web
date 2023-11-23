@@ -61,4 +61,8 @@ const verifyAndExtractUser = async(token) => {
   };
 
 
-export { setToken, setRole, getToken, getRole, removeToken, verifyAndExtractUser}
+const getFullName = (firstName, lastName) => {
+    return `${firstName} ${lastName}`.toLowerCase() || 'Anonymous'
+}
+
+export { setToken, setRole, getToken, getRole, removeToken, verifyAndExtractUser,getFullName}
