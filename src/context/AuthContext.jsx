@@ -17,9 +17,10 @@ export default function AuthProvider({ children }) {
     const token = getToken
     if (token) {
       try {
-        const getUser = verifyAndExtractUser(token);
-        setUser(getUser);
-        setIsAuthenticated(true);
+        verifyAndExtractUser(token).then((user) => {
+          setUser(user);
+          setIsAuthenticated(true); 
+        })
       } catch (err) {
         setUser(null);
         setIsAuthenticated(false);

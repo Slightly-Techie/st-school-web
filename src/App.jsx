@@ -16,6 +16,7 @@ import ProtectedRoute from './protectedRoute/ProtectedRoute'
 import { useAuthContext } from './context/AuthContext'
 import Homepage from './pages/Homepage'
 import PublicRoute from './protectedRoute/PublicRoute'
+import ProtectedWrapper from './protectedRoute/ProtectedWrapper'
 
 function App() {
   const { userRole } = useAuthContext()
@@ -26,16 +27,18 @@ function App() {
         <Route path="/login"  element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
         <Route path="/signup/redirect" element={<PublicRoute><PaymentSuccess /></PublicRoute>} />
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
+        <Route element={<ProtectedWrapper />}>
+        <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Home />} />
           <Route path="Lessons" element={<Lessons />} />
           <Route path="Lessons/:course_title" element={<LessonDetails />} />
           <Route path="Assignments" element={<Assingments />} />
           <Route path="Assignments/:assignment_title" element={<AssignmentDetails />}/>
-          <Route path="/dashboard/profile/certificate"element={<Certificate />}/>
+          <Route path="profile/certificate"element={<Certificate />}/>
           {userRole && (
             <Route path="users" element={<DataTable />}/>
           )}
+        </Route>
         </Route>
         <Route path="/view/user/certificate" element={<ViewCertificate />} />
         <Route path="*" element={<h1>Page Not Found </h1>} />

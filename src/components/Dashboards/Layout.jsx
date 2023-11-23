@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar';
 const Layout = ({ menus, children }) => {
   return (
     <div className="flex flex-col h-screen">
-      <div className="navbar fixed inset-x-0 z-50 top-0 z-50">
+      <div className="navbar fixed inset-x-0 z-50 top-0">
         <Navbar />
       </div>
       <div className="flex h-screen" style={{ overflow: "hidden" }}>

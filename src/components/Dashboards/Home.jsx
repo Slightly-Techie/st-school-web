@@ -1,10 +1,12 @@
+import { useAuthContext } from '../../context/AuthContext'
 import Header from '../Header'
 
 
 const Home = () => {
-  const title = `Welcome Andrew`
+  const { user } = useAuthContext()
+  const title = `Welcome ${user?.first_name || '...' }`
   const para = `Be excited for the days ahead`
-  const stream = `Backend (Caramel) - Javascript`
+  const stream = `${user?.stack_option['stack']['name'] || '...'} (Caramel) - ${user?.stack_option['name'] || '...'}`
   const duration = `90d`
  
   return (
