@@ -2,8 +2,13 @@ import logo from '../../assets/st.jpg'
 import signature from '../../assets/Dadson_signature.png'
 import CertificatePattern from './CertificatePattern'
 import { CERTIFICATE_INFO } from '../../data/certificate'
+import {useAuthContext } from '../../context/AuthContext'
+import { getFullName } from '../../utils/helpers'
 
 const CertificateInfo = () => {
+  const { user } = useAuthContext()
+  const currentDate = new Date().toDateString()
+
   return (
     <>
       <div className="w-[70dvw] border-[5px]  py-4 border-[#0d97ba] overflow-hidden relative">
@@ -21,14 +26,17 @@ const CertificateInfo = () => {
           <h3 className="text-2xl my-2">OF COURSE COMPLETION</h3>
           <h3 className="text-xl py-1">Awarded To</h3>
           <h1 className="text-4xl font-bold mt-1 text-[#434343]">
-            {CERTIFICATE_INFO.student_name}
+            {getFullName(user?.first_name, user?.last_name)}
           </h1>
           <h3 className="text-xl pt-1 pb-2">having successfully completed</h3>
           <h1 className="text-2xl font-bold mt-4 text-[#0d97ba]">
-            {CERTIFICATE_INFO.stack}
+            Basics of {user?.stack_option.name}
           </h1>
+          <h2>
+            {user?.stack_option.stack.name} track 
+          </h2>
           <h3 className="text-xl pt-1 pb-">
-            <span>on</span> <span>{CERTIFICATE_INFO.date_completed}</span>
+            <span>on</span> <span>{currentDate}</span>
           </h3>
           <div className="flex items-center justify-evenly mt-10 mb-5 w-full">
             <img src={signature} alt="" className="w-[10rem]" />

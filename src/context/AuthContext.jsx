@@ -33,9 +33,9 @@ export default function AuthProvider({ children }) {
 
 
   const logout = () => {
+    removeToken()
     setIsAuthenticated(false)
     setUser(null)
-    removeToken()
   }
 
   const state = {
