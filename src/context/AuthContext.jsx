@@ -14,7 +14,7 @@ export default function AuthProvider({ children }) {
   const [userRole, setUserRole] = useState(false);
 
   React.useEffect(() => {
-    const token = getToken
+    const token = getToken()
     if (token) {
       try {
         verifyAndExtractUser(token).then((user) => {

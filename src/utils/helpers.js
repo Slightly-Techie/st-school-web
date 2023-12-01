@@ -3,7 +3,7 @@ import { ROLES, TOKEN } from "./constant"
 
 const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL
 
-const getToken = localStorage.getItem(TOKEN) || null
+const getToken = () => localStorage.getItem(TOKEN) || null
 const getRole = localStorage.getItem(ROLES) || null
 
 const setToken = (value) => localStorage.setItem(TOKEN, value)
