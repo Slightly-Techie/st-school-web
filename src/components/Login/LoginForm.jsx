@@ -39,7 +39,6 @@ function LoginForm() {
       const { token } = data;
       const user = await verifyAndExtractUser(token);
       
-      console.log("user is ", user)
       if (user) {
         setUser(user);
         setIsAuthenticated(true);
@@ -55,7 +54,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-start p-3 md:px-[7rem] mx-auto md:ml-20 max-w-[100dvw] md:w-[80dvw] h-screen relative ">
+    <div className="flex flex-col justify-center items-start p-3 xl:px-[7rem] mx-auto md:ml-20 max-w-[100dvw] md:w-[80dvw] h-screen relative ">
       <img
         src={logo}
         alt="SlightlyTechie's logo"
