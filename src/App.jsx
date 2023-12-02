@@ -27,7 +27,7 @@ function App() {
         <Route path="/login"  element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
         <Route path="/signup/redirect" element={<PublicRoute><PaymentSuccess /></PublicRoute>} />
-        <Route element={<ProtectedWrapper />}>
+        {/* <Route element={<ProtectedWrapper />}> */}
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Home />} />
           <Route path="Lessons" element={<Lessons />} />
@@ -39,7 +39,7 @@ function App() {
             <Route path="users" element={<DataTable />}/>
           )}
         </Route>
-        </Route>
+        {/* </Route> */}
         <Route path="/view/user/certificate" element={<ViewCertificate />} />
         <Route path="*" element={<h1>Page Not Found </h1>} />
       </Routes>
