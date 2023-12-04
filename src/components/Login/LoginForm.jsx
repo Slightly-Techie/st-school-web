@@ -113,16 +113,23 @@ function LoginForm() {
           value={`${loading ? "loading..." : "submit"}`}
           className=" bg-black p-2 h-11 cursor-pointer text-white text-center rounded-lg"
         />
-        <div className="flex items-center gap-3 my-2">
-          <input
-            type="checkbox"
-            id="checkbox"
-            name="checkbox"
-            className="w-5 h-5"
-            value="keep-me-logged-in"
-            onChange={(e) => setIsChecked(e.target.checked)}
-          />
-          <p>Keep me logged in</p>
+        <div className="flex justify-between items-center gap-3 my-2">
+          <div className="flex items-center gap-3 my-2">
+            <input
+              type="checkbox"
+              id="checkbox"
+              name="checkbox"
+              className="w-5 h-5"
+              value="keep-me-logged-in"
+              onChange={(e) => setIsChecked(e.target.checked)}
+            />
+            <p>Keep me logged in</p>
+          </div>
+          <p>
+            <Link to={"/"} className="font-semibold ml-2 hover:underline">
+              Forgot Password
+            </Link>
+          </p>
         </div>
         <p>
           <span>Don&apos;t have an account?</span>
