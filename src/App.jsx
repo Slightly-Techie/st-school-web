@@ -17,6 +17,8 @@ import { useAuthContext } from './context/AuthContext'
 import Homepage from './pages/Homepage'
 import PublicRoute from './protectedRoute/PublicRoute'
 import ProtectedWrapper from './protectedRoute/ProtectedWrapper'
+import ForgotPassword from './pages/ForgotPassword'
+import ChangePassword from './pages/ChangePassword'
 
 function App() {
   const { userRole } = useAuthContext()
@@ -26,6 +28,8 @@ function App() {
         <Route path="/" exact element={<Homepage />} />
         <Route path="/login"  element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
+        <Route path='/forgot_password' element={<PublicRoute><ForgotPassword /></PublicRoute>}/>
+        <Route path='/reset-password' element={<PublicRoute><ChangePassword /></PublicRoute>}/>
         <Route path="/signup/redirect" element={<PublicRoute><PaymentSuccess /></PublicRoute>} />
         <Route element={<ProtectedWrapper />}>
         <Route path="/dashboard" element={<Dashboard />}>

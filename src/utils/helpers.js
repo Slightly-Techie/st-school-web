@@ -1,7 +1,7 @@
 import { handleFetch } from "../components/Signup/api/SignupApi"
 import { ROLES, TOKEN } from "./constant"
 
-const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL
+export const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL
 
 const getToken = () => localStorage.getItem(TOKEN) || null
 const getRole = localStorage.getItem(ROLES) || null
@@ -9,6 +9,9 @@ const getRole = localStorage.getItem(ROLES) || null
 const setToken = (value) => localStorage.setItem(TOKEN, value)
 const removeToken = () => localStorage.removeItem(TOKEN)
 const setRole = (value) => localStorage.setItem(ROLES, value)
+
+const encoder = (data) => btoa(data)
+const decoder = (data) => JSON.parse(data)
 
 
 /* fectchUser from the backend from a token*/
@@ -65,4 +68,4 @@ const getFullName = (firstName, lastName) => {
     return `${firstName} ${lastName}`.toUpperCase() || 'Anonymous'
 }
 
-export { setToken, setRole, getToken, getRole, removeToken, verifyAndExtractUser,getFullName}
+export { setToken, setRole, getToken, getRole, removeToken, verifyAndExtractUser,getFullName, encoder, decoder}

@@ -43,18 +43,19 @@ function LoginForm() {
         setUser(user);
         setIsAuthenticated(true);
         setToken(token);
-        setLoading(false);
           navigate("/dashboard");
         }
       })
       .catch((err) => {
         toast.error(String(err));
-        setLoading(false);
-      });
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   };
 
   return (
-    <div className="flex flex-col justify-center items-start p-3 xl:px-[7rem] mx-auto md:ml-20 max-w-[100dvw] md:w-[80dvw] h-screen relative ">
+    <div className="justify-self-center w-full max-w-[480px]">
       <img
         src={logo}
         alt="SlightlyTechie's logo"
@@ -85,6 +86,7 @@ function LoginForm() {
             id="password"
             name="password"
             placeholder="•••••••••••••"
+            autoComplete="off"
             className="outline-none h-10 p-2 rounded-lg outline outline-1 outline-[#444444]"
             required
             {...register("password", { required: true })}
@@ -111,25 +113,21 @@ function LoginForm() {
           id="submit"
           name="submit"
           value={`${loading ? "loading..." : "submit"}`}
-          className=" bg-black p-2 h-11 cursor-pointer text-white text-center rounded-lg"
+          className=" bg-gray-900 hover:bg-gray-800 p-2 h-11 cursor-pointer text-white text-center rounded-lg"
         />
-        <div className="flex justify-between items-center gap-3 my-2">
-          <div className="flex items-center gap-3 my-2">
-            <input
-              type="checkbox"
-              id="checkbox"
-              name="checkbox"
-              className="w-5 h-5"
-              value="keep-me-logged-in"
-              onChange={(e) => setIsChecked(e.target.checked)}
-            />
-            <p>Keep me logged in</p>
+        <div className="flex items-center gap-3 my-2 text-sm justify-between">
+          <div className="flex flex-row justify-start gap-2 items-center">
+          <input
+            type="checkbox"
+            id="checkbox"
+            name="checkbox"
+            className="w-5 h-5"
+            value="keep-me-logged-in"
+            onChange={(e) => setIsChecked(e.target.checked)}
+          />
+          <p>Keep me logged in</p>
           </div>
-          <p>
-            <Link to={"/"} className="font-semibold ml-2 hover:underline">
-              Forgot Password
-            </Link>
-          </p>
+          <Link to="/forgot_password" className="text-blue-700 cursor-pointer hover:underline">forgot password</Link>
         </div>
         <p>
           <span>Don&apos;t have an account?</span>
