@@ -41,7 +41,7 @@ const Sidebar = ({ Menus }) => {
         <div
           src="/src/assets/control.png"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
-           border-2 bg-black rounded-full p-[4px]  ${!open && 'rotate-180'}`}
+           border-2 bg-black rounded-full p-[4px]  ${open && 'rotate-180'}`}
           onClick={() => setOpen(!open)}
         ><FaArrowRight/></div>
         <ul className="pt-6">

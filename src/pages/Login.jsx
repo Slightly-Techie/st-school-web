@@ -1,12 +1,21 @@
-import Background from '../components/Background'
+import Background from '../assets/backgroundImage.jpg'
 import LoginForm from '../components/Login/LoginForm'
 
 const Login = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center md:justify-between md:w-screen gap-[7rem]">
+    <div className="flex flex-row w-screen h-screen justify-center items-center overflow-hidden">
+    <div className="flex-1 flex w-full justify-center md:px-4 lg:px-0">
       <LoginForm />
-      <Background />
     </div>
+
+    <div className="hidden md:flex w-full flex-1 ">
+      <img
+        src={Background}
+        alt="background side img"
+        className="w-[100dvw] object-center object-cover h-screen"
+      />
+    </div>
+  </div>
   )
 }
 
