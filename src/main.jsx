@@ -6,17 +6,13 @@ import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { options } from './utils/toastConfig.js'
 import  AuthProvider  from './context/AuthContext'
-import CertificateUrlProvider from './context/CertificateUrlContext.jsx'
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <CertificateUrlProvider>
           <Toaster position="top-left" toastOptions={options} duration={3000} />
           <App />
-        </CertificateUrlProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
