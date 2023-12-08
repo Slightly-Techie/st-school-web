@@ -52,6 +52,11 @@ const getFullName = (firstName, lastName) => {
 };
 
 export const formatTimestamp = (inputTimestamp) => {
+
+  if (!inputTimestamp || isNaN(new Date(inputTimestamp))) {
+    return inputTimestamp;
+  }
+
   const options = {
     weekday: "short",
     day: "numeric",
