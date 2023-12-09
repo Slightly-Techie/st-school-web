@@ -32,7 +32,7 @@ const CertificateInfo = ({ info }) => {
           </h1>
           <h2>{user?.stack_option.stack.name} track</h2>
           <h3 className="text-xl pt-1 pb-">
-            <span>on</span> <span>{formatTimestamp(completion_date)}</span>
+            <span>on</span> <span>{formatTimestamp(completion_date) || completion_date || new Date().toString()}</span>
           </h3>
           <div className="flex items-center justify-evenly mt-10 mb-5 w-full">
             <img src={signature} alt="" className="w-[10rem]" />
