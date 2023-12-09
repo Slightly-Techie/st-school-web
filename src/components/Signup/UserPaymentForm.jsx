@@ -21,7 +21,7 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
 
   const componentProps = {
     email: userForm.email,
-    amount: getValues('payment_type') === 'Full' ? 300 * 100 : 800 * 100,
+    amount: getValues('payment_type') === 'Full' ? 800 * 100 : 300 * 100,
     currency: 'GHS',
     metadata: {
       name: `${userForm['first_name']} ${userForm['last_name']}`,
@@ -73,10 +73,7 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
       }
     })
     .catch(err => console.warn("error on line 55 ", err))
-  
-    },
-
-    onClose: () => alert("Wait! You need this oil, don't go!!!!"),
+    }
   }
 
 

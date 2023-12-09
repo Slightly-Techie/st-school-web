@@ -29,7 +29,7 @@ const Certificate = () => {
   useEffect(() => {
     getCertificateIfExists()
       .then((cert) => {
-        if (!cert?.error) setCertificateInfo(cert);
+        if (!cert?.error && !cert.status == 404) setCertificateInfo(cert);
       })
       .catch((err) => {
         console.warn("error at line 36 ", err);
