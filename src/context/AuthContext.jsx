@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { verifyAndExtractUser, getToken, removeToken } from "../utils/helpers";
+import { verifyAndExtractUser, getToken, removeToken, isTokenExpired } from "../utils/helpers";
 import { toast } from "react-hot-toast";
 
 
@@ -15,7 +15,7 @@ export default function AuthProvider({ children }) {
 
   React.useEffect(() => {
     const token = getToken()
-    if (token) {
+    if (token && !isTokenExpired()) {
       try {
         verifyAndExtractUser(token).then((user) => {
           setUser(user);

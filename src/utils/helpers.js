@@ -1,5 +1,6 @@
 import { handleFetch } from "../components/Signup/api/SignupApi";
 import { ROLES, TOKEN } from "./constant";
+import { jwtDecode } from 'jwt-decode'
 
 export const apiUrl = import.meta.env.VITE_BACKEND_BASE_URL;
 
@@ -70,6 +71,22 @@ export const formatTimestamp = (inputTimestamp) => {
   return formattedDate;
 };
 
+
+const isTokenExpired = () => {
+  try {
+    const token = getToken()
+    const decodedToken = jwtDecode(token);
+    const expirationTime = decodedToken.exp;
+    const currentTime = Math.floor(Date.now() / 1000);
+    return currentTime > expirationTime;
+  } catch (error) {
+    console.error('Error decoding or validating token:', error);
+    return true;
+  }
+
+}
+
+
 export {
   setToken,
   setRole,
@@ -79,5 +96,6 @@ export {
   verifyAndExtractUser,
   getFullName,
   encoder,
+  isTokenExpired,
   decoder,
 };
