@@ -1,50 +1,56 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { verifyAndExtractUser, getToken, removeToken, isTokenExpired } from "../utils/helpers";
 import { toast } from "react-hot-toast";
 
-
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 export const useAuthContext = () => useContext(AuthContext);
 
-// eslint-disable-next-line react/prop-types
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userRole, setUserRole] = useState(false);
 
-  React.useEffect(() => {
-    const token = getToken()
+  const checkAuthStatus = async () => {
+    const token = getToken();
+
     if (token && !isTokenExpired()) {
       try {
-        verifyAndExtractUser(token).then((user) => {
-          setUser(user);
-          setIsAuthenticated(true); 
-        })
+        const extractedUser = await verifyAndExtractUser(token);
+        setUser(extractedUser);
+        setIsAuthenticated(true); 
       } catch (err) {
         setUser(null);
         setIsAuthenticated(false);
         removeToken();
-        toast.error("invalid or exprired token");
+        toast.error("Invalid or expired token");
       }
+    } else {
+      setUser(null);
+      setIsAuthenticated(false);
     }
-    
-  }, [isAuthenticated]);
 
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
 
   const logout = () => {
-    removeToken()
-    setIsAuthenticated(false)
-    setUser(null)
-  }
+    removeToken();
+    setUser(null);
+    setIsAuthenticated(false);
+    
+  };
 
   const state = {
     isAuthenticated,
-    userRole,
     user,
     setUser,
     setIsAuthenticated,
-    logout
+    checkAuthStatus,
+    logout,
   };
 
   return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
