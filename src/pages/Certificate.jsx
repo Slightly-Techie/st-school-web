@@ -12,29 +12,38 @@ const Certificate = () => {
 
   const getCertificateIfExists = async () => {
     try {
-      const response = await fetch(`${apiUrl}/certificates/${user?.id}`, {
+      // Checking if user.id exists first
+      if (!user?.id) {
+        // If user.id is undefined, i am canceling the fetch so it doesnt return the error
+        return null;
+      }
+  
+      const response = await fetch(`${apiUrl}/certificates/${user.id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
       });
-
+  
       if (response) return response.json();
     } catch (err) {
       console.log("certificate error ", err);
-      toast.error("failed to get cerfificate");
+      toast.error("failed to get certificate");
     }
   };
-
+  
   useEffect(() => {
     getCertificateIfExists()
       .then((cert) => {
-        if (!cert?.error && !cert.status == 404) setCertificateInfo(cert);
+        if (cert && !cert.error && cert.status !== 404) {
+          setCertificateInfo(cert);
+        }
       })
       .catch((err) => {
         console.warn("error at line 36 ", err);
       });
   }, []);
+  
 
   return (
     <div className="container flex justify-center mx-auto">
