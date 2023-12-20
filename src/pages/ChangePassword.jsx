@@ -58,7 +58,7 @@ const ChangePassword = () => {
                 placeholder="example@gmail.com"
                 className="outline-none p-2 h-10 rounded-lg outline outline-1 outline-[#444444]"
                 autoComplete="off"
-                {...register("reset-email", { required: true })}
+                {...register("token", { required: true })}
                 defaultValue={""}
               />
             </div>
