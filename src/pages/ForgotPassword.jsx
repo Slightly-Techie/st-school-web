@@ -2,7 +2,7 @@ import { FaArrowLeft, FaTimesCircle, FaTrash } from "react-icons/fa";
 import Background from "../assets/backgroundImage.jpg";
 import GenericFormHeader from "../components/GenericFormHeader";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { apiUrl } from "../utils/helpers";
 import toast from "react-hot-toast";
@@ -11,6 +11,7 @@ const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
   const [emailSent, setEmailSent] = useState(false);
+  const navigate = useNavigate();
 
   const { register, handleSubmit, getValues } = useForm();
 
@@ -51,6 +52,7 @@ const ForgotPassword = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
+    console.log("data ", data["reset-email"])
     try {
       const response = await fetch(`${apiUrl}/forgot-password`, {
         method: "POST",
@@ -63,6 +65,7 @@ const ForgotPassword = () => {
       if (response.ok) {
         console.log("reset email password response ", response);
         toast.success("sent reset email");
+        navigate("/reset-password")
       }
     } catch (err) {
       console.warn(err);

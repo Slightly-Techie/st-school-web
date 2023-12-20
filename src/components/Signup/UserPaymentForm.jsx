@@ -15,8 +15,12 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
     register,
     handleSubmit,
     getValues,
+    watch,
     formState: { errors },
   } = useForm();
+
+  const paymentValue = watch("payment_type")
+  const phoneNumber = watch("phone_number")
 
 
   const componentProps = {
@@ -25,7 +29,7 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
     currency: 'GHS',
     metadata: {
       name: `${userForm['first_name']} ${userForm['last_name']}`,
-      phone: getValues('phone_number'),
+      phone: phoneNumber,
     },
     publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
     text: "Proceed",
@@ -55,7 +59,7 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
       if(data.status) {
 
         const phoneNumber = getValues('phone_number')
-        const paymentType = getValues('payment_type')
+        const paymentType = paymentValue
         const userInfo = {...userForm, ['phone_number']: phoneNumber, ['payment_type']: paymentType, ['reference']: response.reference}
 
 
@@ -99,7 +103,7 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
             className="border border-[#C9C9C9] focus:outline-gray-600  w-full p-2 rounded-lg text-[#706E6E] "
             required
             {...register("payment_type", { required: true })}
-            defaultValue={userForm["payment_type"] || "Full"}
+            defaultValue={userForm["payment_type"]}
           >
             <option value="" disabled>
               Select Payment Type
