@@ -22,15 +22,17 @@ const UserPaymentForm = ({ onPrevious, formInput }) => {
   const paymentValue = watch("payment_type")
   const phoneNumber = watch("phone_number")
 
-
+  const percentageToAdd = 0.0195;
+  const baseAmount = getValues('payment_type') === 'Full' ? 800 * 100 : 300 * 100;
+  
   const componentProps = {
-    email: userForm.email,
-    amount: getValues('payment_type') === 'Full' ? 800 * 100 : 300 * 100,
-    currency: 'GHS',
-    metadata: {
-      name: `${userForm['first_name']} ${userForm['last_name']}`,
-      phone: phoneNumber,
-    },
+      email: userForm.email,
+      amount: baseAmount + (baseAmount * percentageToAdd),
+      currency: 'GHS',
+      metadata: {
+          name: `${userForm['first_name']} ${userForm['last_name']}`,
+          phone: phoneNumber,
+  },
     publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
     text: "Proceed",
     onSuccess: (response) => {
