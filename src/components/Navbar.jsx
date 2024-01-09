@@ -18,7 +18,6 @@ const Navbar = () => {
     <nav className="fixed inset-x-0 top-0 h-16 flex w-full flex-wrap items-center z-50 bg-white justify-between py-2 text-black shadow-lg hover:text-neutral-700 lg:py-4">
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <img src={logo} alt="" />
-
         {/* Mobile Menu Icon */}
         <div
           className={`block lg:hidden cursor-pointer ${
