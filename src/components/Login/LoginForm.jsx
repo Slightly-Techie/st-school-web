@@ -19,7 +19,7 @@ function LoginForm() {
 
   const { state } = useLocation()
 
-  
+
   const { register, handleSubmit, setValue } = useForm();
 
   useEffect(() => {
@@ -27,18 +27,18 @@ function LoginForm() {
     if(state?.email) setValue("email", state?.email)
   }, [isAuthenticated]);
 
-  
+
   const onSubmit = (data) => {
     const { email, password } = data;
     setLoading(true);
-    
+
     handleLogin(email, password)
     .then(async(data) => {
-      
+
       // console.log("login token data ", data)
       const { token } = data;
       const user = await verifyAndExtractUser(token);
-      
+
       if (user) {
         setUser(user);
         setIsAuthenticated(true);
@@ -55,15 +55,17 @@ function LoginForm() {
   };
 
   return (
-    <div className="justify-self-center w-full max-w-[480px]">
-      <img
-        src={logo}
-        alt="SlightlyTechie's logo"
-        className="mb-4 md:my-0 absolute top-[5.5rem] left-2 md:top-5 md:left-6"
-      />
+    <div className="justify-self-center w-full max-w-[480px] mx-4">
+      <Link to="/">
+          <img
+            src={logo}
+            alt="SlightlyTechie's logo"
+            className="mb-4 md:my-0 absolute top-[5.5rem] left-2 md:top-5 md:left-6"
+          />
+      </Link>
       <LoginHeading />
       <form
-        className=" flex flex-col w-full p-2 gap-5 text-[#444444]"
+        className=" flex flex-col w-full py-2 gap-5 text-[#444444]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col w-full  gap-2">
