@@ -1,6 +1,7 @@
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import STLogo from "../../assets/st-logo.png"
 
 const pageLinks = [
   {
@@ -28,7 +29,7 @@ function Navbar() {
         <section className="flex w-full h-full justify-between items-center p-5">
           {/* Left */}
           <section>
-            <img src="https://slightlytechie.com/_next/image?url=%2Flogo.png&w=32&q=75" alt="st-logo" />
+            <img src={STLogo} alt="st-logo" className="w-[25px] h-[25px]" />
           </section>
           {/* Right */}
           <section className="hidden lg:flex gap-5 items-center">
@@ -61,8 +62,8 @@ function Navbar() {
       <section
         className={
           navIsOpen
-            ? "lg:hidden fixed z-[40] h-fit pt-[7vh] bg-white border-b w-full top-0 left-0 ease duration-500"
-            : "lg:hidden fixed z-[40] h-fit pt-[7vh] bg-white border-b w-full top-[-50vh] left-0 ease duration-500"
+            ? "lg:hidden fixed z-[40] h-auto pt-[7vh] bg-white border-b w-full top-0 left-0 ease duration-500"
+            : "lg:hidden fixed z-[40] h-auto pt-[7vh] bg-white border-b w-full top-[-50vh] left-0 ease duration-500"
         }
       >
         <section className="flex flex-col justify-center bg-white gap-5 w-full h-full p-5">
