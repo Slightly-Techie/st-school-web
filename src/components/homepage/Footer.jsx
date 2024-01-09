@@ -17,7 +17,7 @@ function Footer() {
         <section className="flex">
           {/* Left */}
           <section>
-            © 2023 <a href="https://slightlytechie.com">Slightly Techie™</a>.
+            © {(new Date().getFullYear())} <a href="https://slightlytechie.com">Slightly Techie™</a>.
             All Rights Reserved.
           </section>
         </section>

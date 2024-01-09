@@ -1,4 +1,4 @@
-import { FaArrowLeft, FaTimesCircle, FaTrash } from "react-icons/fa";
+import { FaArrowLeft, FaTimesCircle } from "react-icons/fa";
 import Background from "../assets/backgroundImage.jpg";
 import GenericFormHeader from "../components/GenericFormHeader";
 import { useState, useEffect } from "react";
@@ -52,7 +52,6 @@ const ForgotPassword = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    console.log("data ", data["reset-email"])
     try {
       const response = await fetch(`${apiUrl}/forgot-password`, {
         method: "POST",
@@ -63,12 +62,10 @@ const ForgotPassword = () => {
       });
 
       if (response.ok) {
-        console.log("reset email password response ", response);
         toast.success("sent reset email");
         navigate("/reset-password")
       }
     } catch (err) {
-      console.warn(err);
       toast.error(String(err));
     } finally {
       setLoading(false);
@@ -76,7 +73,7 @@ const ForgotPassword = () => {
   };
   return (
     <div className="flex flex-row w-screen h-screen justify-center items-center overflow-hidden">
-      <div className="flex-1 flex w-full justify-center md:px-4 lg:px-0">
+      <div className="flex-1 flex w-full justify-center md:px-4 mx-4 lg:px-0">
         <div className="justify-self-center flex flex-col w-full max-w-[400px]">
           <form
             onSubmit={handleSubmit(onSubmit)}
