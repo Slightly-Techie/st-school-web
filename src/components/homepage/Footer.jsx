@@ -1,3 +1,5 @@
+import STLogo from "../../assets/st-logo.png"
+
 function Footer() {
   return (
     <footer className="bg-black text-white h-auto py-8 px-5">
@@ -6,8 +8,9 @@ function Footer() {
           {/* Left Side */}
           <section>
             <img
-              src="https://slightlytechie.com/_next/image?url=%2Flogo.png&w=32&q=75"
+              src={STLogo}
               alt="st-logo"
+              className="w-[25px] h-[25px]"
             />
           </section>
           {/* Right */}
