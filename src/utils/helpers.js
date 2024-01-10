@@ -86,8 +86,19 @@ const isTokenExpired = () => {
 
 }
 
+const getUserId = () => {
+  const token = getToken()
+  if(token) {
+    const { user_id } = jwtDecode(token)
+    return user_id
+  }
+
+  return null
+}
+
 
 export {
+  getUserId,
   setToken,
   setRole,
   getToken,

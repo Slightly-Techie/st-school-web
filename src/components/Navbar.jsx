@@ -56,9 +56,9 @@ const Navbar = () => {
               <span className="">
                 <img src={bell} alt="" />
               </span>
-              <span className="absolute right-82 top-30 -mt-4 ml-2.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[16px] font-bold text-red-500">
+              {/* <span className="absolute right-82 top-30 -mt-4 ml-2.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[16px] font-bold text-red-500">
                 2
-              </span>
+              </span> */}
               <h4>Notifications</h4>
             </div>
             <div className="flex gap-2 px-4 py-2 text-black">
@@ -83,7 +83,7 @@ const Navbar = () => {
           <div className="flex cursor-pointer transition duration-200 ease-in-out ">
             <img className="h-6 w-6" src={bell} alt="" />
             <span className="relative right-6 top-1 -mt-4 ml-2.5 rounded-full px-[0.35em] py-[0.15em] text-[16px] font-bold leading-none text-red-500">
-              2
+              
             </span>
           </div>
           <div className="flex mr-12 gap-[1.5em] transition duration-200 ease-in-out">
